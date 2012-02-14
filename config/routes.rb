@@ -1,4 +1,5 @@
 ProjectSignups::Application.routes.draw do
+
   resources :project_preferences
 
   resources :projects
@@ -6,6 +7,15 @@ ProjectSignups::Application.routes.draw do
   resources :groups
 
   resources :students
+
+  resources :signups
+
+  # Authentication
+  get 'login' => 'sessions#new', :as => :login
+  post 'login' => 'sessions#create'
+  match 'logout' => 'sessions#destroy', :as => :logout
+
+  root :to => "signups#new"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,0 +1,26 @@
+<%= link_to 'See all Projects', projects_path %>
+
+<%= form_tag(signups_path) do %>
+
+  <div class="field">
+    <%= label_tag 'group_id', 'Group Number:' %>
+    <%= select_tag 'group_id', options_from_collection_for_select(@groups, 'id', 'name') %>
+    <%= link_to 'See all groups', groups_path %>
+  </div>
+
+  <% %w[First Second Third].each do |ordinal| %>
+    <div class="field">
+      <%= label_tag "#{ordinal.downcase}_choice", "#{ordinal} Choice:" %>
+      <%= select_tag "#{ordinal.downcase}_choice", options_from_collection_for_select(@projects, 'id', 'title') %>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= label_tag "sid", "SID:" %>
+    <%= text_field_tag "sid" %>
+  </div>
+
+  <div class="field">
+    <%= submit_tag 'Submit' %>
+  </div>
+<% end %>
