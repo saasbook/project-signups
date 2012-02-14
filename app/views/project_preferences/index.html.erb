@@ -14,7 +14,7 @@
   <tr>
     <td><%= proj_pref.level %></td>
     <td><%= link_to proj_pref.group_id, group_path(proj_pref.group_id) %></td>
-    <td><%= link_to proj_pref.project_id, project_path(proj_pref.project_id) %></td>
+    <td><%= link_to proj_pref.project.title, project_path(proj_pref.project_id) %></td>
     <td><%= link_to 'Show', proj_pref %></td>
     <td><%= link_to 'Edit', edit_project_preference_path(proj_pref) %></td>
     <td><%= link_to 'Destroy', proj_pref, confirm: 'Are you sure?', method: :delete %></td>

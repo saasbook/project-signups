@@ -27,6 +27,7 @@ class StudentsController < ApplicationController
   # GET /students/new.json
   def new
     @student = Student.new
+    @groups = Group.order('id ASC')
 
     respond_to do |format|
       format.html # new.html.erb

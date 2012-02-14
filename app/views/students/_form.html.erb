@@ -25,7 +25,7 @@
   </div>
   <div class="field">
     <%= f.label :group_id %><br />
-    <%= f.number_field :group_id %>
+    <%= f.select :group_id, options_from_collection_for_select(@groups, 'id', 'select_name') %>
   </div>
   <div class="actions">
     <%= f.submit %>

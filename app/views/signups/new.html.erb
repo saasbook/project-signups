@@ -1,10 +1,12 @@
 <h1>CS169 Project Signup Form</h1>
 <%= form_tag(signups_path) do %>
+  <div>
+    <%= link_to 'See all groups', groups_path %>
+  </div>
 
   <div class="field">
     <%= label_tag 'group_id', 'Group Number:' %>
-    <%= select_tag 'group_id', options_from_collection_for_select(@groups, 'id', 'id') %>
-    <%= link_to 'See all groups', groups_path %>
+    <%= select_tag 'group_id', options_from_collection_for_select(@groups, 'id', 'select_name') %>
   </div>
 
   <div>
