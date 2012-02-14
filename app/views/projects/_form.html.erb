@@ -19,6 +19,14 @@
     <%= f.label :description %><br />
     <%= f.text_area :description %>
   </div>
+  <div class="field">
+    <%= f.label :private %><br />
+    <%= f.check_box :private %>
+  </div>
+  <div class="field">
+    <%= label_tag :group_id %><br />
+    <%= text_field_tag :group_id, @group_id %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

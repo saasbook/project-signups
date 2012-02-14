@@ -1,5 +1,7 @@
 class Group < ActiveRecord::Base
   has_many :students
+  has_many :self_projects
+  has_many :private_projects, :through => :self_projects, :source => :project
 
   def student_names
     if students.empty?

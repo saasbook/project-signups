@@ -13,6 +13,10 @@
     <%= link_to 'See all Projects', projects_path %>
   </div>
 
+  <p>
+    We encourage you to pick external projects over your own.
+  </p>
+
   <% %w[First Second Third].each do |ordinal| %>
     <div class="field">
       <%= label_tag "#{ordinal.downcase}_choice", "#{ordinal} Choice:" %>

@@ -37,15 +37,23 @@ class ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit
     @project = Project.find(params[:id])
+    if @project.private
+      @group_id = @project.group ? @project.group.id : ''
+    end
   end
 
   # POST /projects
   # POST /projects.json
   def create
+    @group_id = params[:group_id]
     @project = Project.new(params[:project])
+    success = @project.save
+    if params[:project][:private]
+      success &&= SelfProject.create!(:project => @project, :group_id => @group_id)
+    end
 
     respond_to do |format|
-      if @project.save
+      if success
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render json: @project, status: :created, location: @project }
       else
@@ -58,10 +66,15 @@ class ProjectsController < ApplicationController
   # PUT /projects/1
   # PUT /projects/1.json
   def update
+    @group_id = params[:group_id]
     @project = Project.find(params[:id])
+    success = @project.update_attributes(params[:project])
+    if params[:project][:private]
+      success &&= SelfProject.create!(:project => @project, :group_id => @group_id)
+    end
 
     respond_to do |format|
-      if @project.update_attributes(params[:project])
+      if success
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
         format.json { head :ok }
       else
