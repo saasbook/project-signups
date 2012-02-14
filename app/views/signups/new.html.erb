@@ -14,7 +14,10 @@
   </div>
 
   <p>
-    We encourage you to pick external projects over your own.
+    We encourage you to pick external projects over your own. Please only
+    select an internal project if you were the group that proposed it to us.
+    Internal projects have been approved under the condition that you find an
+    external, non-technical customer to work with.
   </p>
 
   <% %w[First Second Third].each do |ordinal| %>
@@ -24,11 +27,13 @@
     </div>
   <% end %>
 
+  <% if false %>
   <div class="field">
     <div> This is not implemented yet </div>
     <%= label_tag "sid", "SID:" %>
     <%= text_field_tag "sid" %>
   </div>
+  <% end %>
 
   <div class="field">
     <%= submit_tag 'Submit' %>
