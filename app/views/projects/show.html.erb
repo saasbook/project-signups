@@ -7,7 +7,7 @@
 
 <p>
   <b>Description:</b>
-  <%= @project.description %>
+  <%= raw sanitize(@project.description).gsub(/\n/, '<br />') %>
 </p>
 
 
