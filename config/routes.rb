@@ -15,7 +15,7 @@ ProjectSignups::Application.routes.draw do
   post 'login' => 'sessions#create'
   match 'logout' => 'sessions#destroy', :as => :logout
 
-  root :to => "signups#new"
+  root :to => "home#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

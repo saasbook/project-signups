@@ -1,0 +1,16 @@
+<h1>CS169 Project Website</h1>
+
+<div>
+  <ul>
+    <li> <%= link_to "Project Signups here", new_signup_path %> </li>
+    <li> <%= link_to "Projects", projects_path %> </li>
+    <li> <%= link_to "Groups", groups_path %> </li>
+  </ul>
+</div>
+
+<% if @authorized %>
+  <ul>
+    <li> <%= link_to "Students", students_path %> </li>
+    <li> <%= link_to "Project Preferences", project_preferences_path %> </li>
+  </ul>
+<% end %>
