@@ -1,7 +1,7 @@
 <h1>Listing projects</h1>
 
-<table>
-  <thead>
+<table id="projects">
+  <!--thead>
     <tr>
       <th>Title</th>
       <th>Description (for full description, click on title)</th>
@@ -11,18 +11,23 @@
         <th></th>
       <% end %>
     </tr>
-  </thead>
+  </thead-->
 
   <tbody>
   <% @projects.each do |project| %>
     <tr>
-      <td><%= link_to project.title, project %></td>
-      <td><%= truncate project.description, :length => 500 %></td>
+      <td>
+        <h3><%= link_to project.title, project %></h3>
+        <%= truncate project.description, :length => 500 %>
+        <%= link_to 'See More', project %>
       <% if @authorized %>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, confirm: 'Are you sure?', method: :delete %></td>
+        <div>
+          <br />
+          <%= link_to 'Edit', edit_project_path(project) %>
+          <%= link_to 'Destroy', project, confirm: 'Are you sure?', method: :delete %>
+        </div>
       <% end %>
+      </td>
     </tr>
   <% end %>
   </tbody>
