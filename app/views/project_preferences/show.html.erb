@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Level:</b>
+  <%= @project_preference.level %>
+</p>
+
+<p>
+  <b>Group:</b>
+  <%= @project_preference.group_id %>
+</p>
+
+<p>
+  <b>Project:</b>
+  <%= @project_preference.project_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_project_preference_path(@project_preference) %> |
+<%= link_to 'Back', project_preferences_path %>

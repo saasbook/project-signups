@@ -1,0 +1,27 @@
+<h1>Listing project_preferences</h1>
+
+<table>
+  <tr>
+    <th>Level</th>
+    <th>Group</th>
+    <th>Project</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @project_preferences.each do |project_preference| %>
+  <tr>
+    <td><%= project_preference.level %></td>
+    <td><%= project_preference.group_id %></td>
+    <td><%= project_preference.project_id %></td>
+    <td><%= link_to 'Show', project_preference %></td>
+    <td><%= link_to 'Edit', edit_project_preference_path(project_preference) %></td>
+    <td><%= link_to 'Destroy', project_preference, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Project preference', new_project_preference_path %>
