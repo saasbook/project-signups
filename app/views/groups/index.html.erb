@@ -2,6 +2,8 @@
 
 <table>
   <tr>
+    <th>Number</th>
+    <th>Members</th>
     <% if @authorized %>
       <th></th>
       <th></th>
@@ -11,6 +13,8 @@
 
 <% @groups.each do |group| %>
   <tr>
+    <td><%= group.id %></td>
+    <td><%= group.student_names.join(", ") %></td>
     <% if @authorized %>
       <td><%= link_to 'Show', group %></td>
       <td><%= link_to 'Edit', edit_group_path(group) %></td>

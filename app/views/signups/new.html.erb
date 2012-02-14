@@ -3,7 +3,7 @@
 
   <div class="field">
     <%= label_tag 'group_id', 'Group Number:' %>
-    <%= select_tag 'group_id', options_from_collection_for_select(@groups, 'id', 'name') %>
+    <%= select_tag 'group_id', options_from_collection_for_select(@groups, 'id', 'id') %>
     <%= link_to 'See all groups', groups_path %>
   </div>
 

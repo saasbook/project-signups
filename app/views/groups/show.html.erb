@@ -1,5 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+<div>
+  <b>Members:</b>
+  <%= @group.student_names.join(", ") %>
+</div>
 
 <% if @authorized %>
   <%= link_to 'Edit', edit_group_path(@group) %> |

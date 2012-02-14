@@ -16,7 +16,7 @@
     <td><%= student.first_name %></td>
     <td><%= student.last_name %></td>
     <td><%= student.nick_name %></td>
-    <td><%= student.group_id %></td>
+    <td><%= link_to student.group_id, group_path(student.group_id) %></td>
     <td><%= link_to 'Show', student %></td>
     <td><%= link_to 'Edit', edit_student_path(student) %></td>
     <td><%= link_to 'Destroy', student, confirm: 'Are you sure?', method: :delete %></td>
