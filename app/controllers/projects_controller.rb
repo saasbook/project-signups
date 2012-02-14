@@ -90,7 +90,7 @@ class ProjectsController < ApplicationController
     json = params[:content]
     projects = JSON.parse(json)
     projects.each do |project|
-      Project.create!(project)
+      Project.create!(project) unless Project.find(project[:id])
     end
     flash[:notice] = "Success"
     redirect_to action: 'bulk_import'
