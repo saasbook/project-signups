@@ -10,14 +10,14 @@
     <th></th>
   </tr>
 
-<% @project_preferences.each do |project_preference| %>
+<% @project_preferences.each do |proj_pref| %>
   <tr>
-    <td><%= project_preference.level %></td>
-    <td><%= project_preference.group_id %></td>
-    <td><%= project_preference.project_id %></td>
-    <td><%= link_to 'Show', project_preference %></td>
-    <td><%= link_to 'Edit', edit_project_preference_path(project_preference) %></td>
-    <td><%= link_to 'Destroy', project_preference, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= proj_pref.level %></td>
+    <td><%= link_to proj_pref.group_id, group_path(proj_pref.group_id) %></td>
+    <td><%= link_to proj_pref.project_id, project_path(proj_pref.project_id) %></td>
+    <td><%= link_to 'Show', proj_pref %></td>
+    <td><%= link_to 'Edit', edit_project_preference_path(proj_pref) %></td>
+    <td><%= link_to 'Destroy', proj_pref, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
