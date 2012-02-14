@@ -1,4 +1,6 @@
 class GroupsController < ApplicationController
+  before_filter :authorize!, :except => [:index, :show]
+
   # GET /groups
   # GET /groups.json
   def index

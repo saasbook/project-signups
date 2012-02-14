@@ -1,4 +1,6 @@
 class ProjectPreferencesController < ApplicationController
+  before_filter :authorize!
+
   # GET /project_preferences
   # GET /project_preferences.json
   def index
