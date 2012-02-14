@@ -3,6 +3,8 @@ ProjectSignups::Application.routes.draw do
   resources :project_preferences
 
   resources :projects
+  get 'projects_bulk_import' => "projects#bulk_import"
+  post 'projects_bulk_import' => "projects#bulk_create", :as => :bulk_create
 
   resources :groups
 

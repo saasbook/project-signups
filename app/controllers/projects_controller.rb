@@ -82,4 +82,17 @@ class ProjectsController < ApplicationController
       format.json { head :ok }
     end
   end
+
+  def bulk_import
+  end
+
+  def bulk_create
+    json = params[:content]
+    projects = JSON.parse(json)
+    projects.each do |project|
+      Project.create!(project)
+    end
+    flash[:notice] = "Success"
+    redirect_to action: 'bulk_import'
+  end
 end
