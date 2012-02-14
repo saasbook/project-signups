@@ -1,11 +1,14 @@
-<%= link_to 'See all Projects', projects_path %>
-
+<h1>CS169 Project Signup Form</h1>
 <%= form_tag(signups_path) do %>
 
   <div class="field">
     <%= label_tag 'group_id', 'Group Number:' %>
     <%= select_tag 'group_id', options_from_collection_for_select(@groups, 'id', 'name') %>
     <%= link_to 'See all groups', groups_path %>
+  </div>
+
+  <div>
+    <%= link_to 'See all Projects', projects_path %>
   </div>
 
   <% %w[First Second Third].each do |ordinal| %>

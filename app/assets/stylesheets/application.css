@@ -5,3 +5,11 @@
  *= require_self
  *= require_tree . 
 */
+
+thead tr {
+      background-color: #EEEEEE;
+}
+
+tr:nth-child(even) {
+      background-color: #F4F4F4;
+}
