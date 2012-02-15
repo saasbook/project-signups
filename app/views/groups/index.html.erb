@@ -13,7 +13,7 @@
 
 <% @groups.each do |group| %>
   <tr>
-    <td><%= group.id %></td>
+    <td><%= link_to group.id, group %></td>
     <td><%= group.student_names.join(", ") %></td>
     <% if @authorized %>
       <td><%= link_to 'Show', group %></td>

@@ -12,9 +12,15 @@ class SignupsController < ApplicationController
 
     begin
       ProjectPreference.transaction do
-        ProjectPreference.create!(:group_id => group_id, :level => 1, :project_id => first_choice)
-        ProjectPreference.create!(:group_id => group_id, :level => 2, :project_id => second_choice)
-        ProjectPreference.create!(:group_id => group_id, :level => 3, :project_id => third_choice)
+        choices = [nil, first_choice, second_choice, third_choice]
+        1.upto(3).each do |i|
+          @proj_pref = ProjectPreference.find_by_group_id_and_level(group_id, i)
+          if @proj_pref
+            @proj_pref.update_attributes!(:project_id => choices[i])
+          else
+            ProjectPreference.create!(:group_id => group_id, :level => i, :project_id => choices[i])
+          end
+        end
       end
 
       flash[:notice] = "Successfully submitted project preferences"
