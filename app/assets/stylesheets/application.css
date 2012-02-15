@@ -22,3 +22,7 @@ table#projects tr:nth-child(even) {
 ul.plain {
   list-style: none;
 }
+
+p.important {
+  color: #AA0000;
+}
