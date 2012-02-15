@@ -16,10 +16,15 @@ class SignupsController < ApplicationController
         1.upto(3).each do |i|
           @proj_pref = ProjectPreference.find_by_group_id_and_level(group_id, i)
           if @proj_pref
-            @proj_pref.update_attributes!(:project_id => choices[i])
+            @proj_pref.update_attribute(:project_id, choices[i])
+            @proj_pref.save(:validate => false)
           else
-            ProjectPreference.create!(:group_id => group_id, :level => i, :project_id => choices[i])
+            @proj_pref = ProjectPreference.new(:group_id => group_id, :level => i, :project_id => choices[i])
+            @proj_pref.save(:validate => false)
           end
+        end
+        ProjectPreference.find_all_by_group_id(group_id).each do |pp|
+          pp.save!
         end
       end
 

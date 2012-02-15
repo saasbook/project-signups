@@ -2,7 +2,7 @@ class Group < ActiveRecord::Base
   has_many :students
   has_many :self_projects
   has_many :private_projects, :through => :self_projects, :source => :project
-  has_many :project_preferences
+  has_many :project_preferences, :dependent => :destroy
 
   def student_names
     if students.empty?
