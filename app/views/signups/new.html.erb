@@ -28,7 +28,7 @@
   <% @preference_levels.each do |level| %>
     <div class="field">
       <%= label_tag "choice[#{level}]", "#{ActiveSupport::Inflector.ordinalize(level)} Choice:" %>
-      <%= select_tag "choice[#{level}]", options_from_collection_for_select(@projects, 'id', 'title', @choices[level.to_s]) %>
+      <%= collection_select("choice", level, @projects, :id, :title, :include_blank => true, :selected => @choices[level.to_s]) %>
     </div>
   <% end %>
 

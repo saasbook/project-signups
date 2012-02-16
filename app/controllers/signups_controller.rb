@@ -18,6 +18,7 @@ class SignupsController < ApplicationController
     begin
       ProjectPreference.transaction do
         @choices.each_pair do |i, choice|
+          raise "Cannot select blank project"  if choice.blank? # Don't do anything if choice is blank
           @proj_pref = ProjectPreference.find_by_group_id_and_level(group_id, i)
           if @proj_pref
             @proj_pref.update_attribute(:project_id, choice)
