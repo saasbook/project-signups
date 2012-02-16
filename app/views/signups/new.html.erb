@@ -24,10 +24,11 @@
     external, non-technical customer to work with.
   </p>
 
-  <% %w[First Second Third].each do |ordinal| %>
+
+  <% @preference_levels.each do |level| %>
     <div class="field">
-      <%= label_tag "#{ordinal.downcase}_choice", "#{ordinal} Choice:" %>
-      <%= select_tag "#{ordinal.downcase}_choice", options_from_collection_for_select(@projects, 'id', 'title') %>
+      <%= label_tag "choice[#{level}]", "#{ActiveSupport::Inflector.ordinalize(level)} Choice:" %>
+      <%= select_tag "choice[#{level}]", options_from_collection_for_select(@projects, 'id', 'title', @choices[level.to_s]) %>
     </div>
   <% end %>
 

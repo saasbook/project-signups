@@ -26,3 +26,9 @@ ul.plain {
 p.important {
   color: #AA0000;
 }
+
+p.error {
+  color: #AA0000;
+  background-color: #f8f8f8;
+  padding: 10px;
+}
