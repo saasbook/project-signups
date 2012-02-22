@@ -4,7 +4,7 @@ class ProjectPreferencesController < ApplicationController
   # GET /project_preferences
   # GET /project_preferences.json
   def index
-    @project_preferences = ProjectPreference.all
+    @project_preferences = ProjectPreference.order('group_id ASC')
 
     respond_to do |format|
       format.html # index.html.erb
