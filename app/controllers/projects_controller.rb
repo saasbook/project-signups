@@ -13,7 +13,7 @@ class ProjectsController < ApplicationController
   end
 
   def assignments
-    @projects = Project.joins(:assigned_group).where("projects.id = groups.assigned_project_id").order("groups.assigned_project_id ASC")
+    @projects = Project.joins(:assigned_group).where("projects.id = groups.assigned_project_id").order("groups.id ASC")
   end
 
   # GET /projects/1
