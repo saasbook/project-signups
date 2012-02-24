@@ -4,7 +4,7 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all
+    @groups = Group.order('id ASC')
 
     respond_to do |format|
       format.html # index.html.erb
