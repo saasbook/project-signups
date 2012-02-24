@@ -5,6 +5,7 @@ ProjectSignups::Application.routes.draw do
   resources :projects
   get 'projects_bulk_import' => "projects#bulk_import"
   post 'projects_bulk_import' => "projects#bulk_create", :as => :bulk_create
+  get 'assignments' => "projects#assignments", :as => :project_assignments
 
   resources :groups
 

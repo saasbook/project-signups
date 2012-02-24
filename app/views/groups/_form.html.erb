@@ -11,6 +11,16 @@
     </div>
   <% end %>
 
+  <div>
+    <b>Members:</b> <%= @group.student_names.join(", ") %>
+  </div>
+
+  <div class="field">
+    <%= f.label :assigned_project_id %><br />
+    <%= f.select :assigned_project_id, options_from_collection_for_select(@projects, 'id', 'title', @group.assigned_project_id) %>
+    <%= "NIL" if @group.assigned_project_id.blank? %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

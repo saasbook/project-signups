@@ -1,0 +1,30 @@
+<h1>Listing projects</h1>
+
+<table id="projects">
+  <!--thead>
+    <tr>
+      <th>Title</th>
+      <th>Description (for full description, click on title)</th>
+      <% if @authorized %>
+        <th></th>
+        <th></th>
+        <th></th>
+      <% end %>
+    </tr>
+  </thead-->
+
+  <tbody>
+  <% @projects.each do |project| %>
+    <tr>
+      <td><%= link_to project.title, project %>:</td>
+      <td><%= project.assigned_group.student_names.join(", ") %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br />
+
+<% if @authorized %>
+  <%= link_to 'New Project', new_project_path %>
+<% end %>

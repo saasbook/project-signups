@@ -1,8 +1,14 @@
 class Group < ActiveRecord::Base
   has_many :students
+
+  # This makes no sense
+  # FIXME: In the future, completely rewrite it because it makes no sense
   has_many :self_projects
   has_many :private_projects, :through => :self_projects, :source => :project
+
   has_many :project_preferences, :dependent => :destroy
+  # This is so confusing
+  belongs_to :assigned_project, :class_name => "Project", :foreign_key => :assigned_project_id
 
   def student_names
     if students.empty?

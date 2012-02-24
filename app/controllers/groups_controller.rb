@@ -18,6 +18,7 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
 
     @proj_prefs = @group.project_preferences.order('level ASC')
+    @proj = @group.assigned_project
 
     respond_to do |format|
       format.html # show.html.erb
@@ -29,6 +30,7 @@ class GroupsController < ApplicationController
   # GET /groups/new.json
   def new
     @group = Group.new
+    @projects = Project.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -39,6 +41,7 @@ class GroupsController < ApplicationController
   # GET /groups/1/edit
   def edit
     @group = Group.find(params[:id])
+    @projects = Project.all
   end
 
   # POST /groups

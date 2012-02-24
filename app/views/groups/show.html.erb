@@ -4,6 +4,10 @@
   <b>Members:</b>
   <%= @group.student_names.join(", ") %>
 </div>
+<div>
+  <b>Assigned Project:</b>
+  <%= @proj.title unless @proj.nil? %>
+</div>
 
 <% if @authorized %>
   <% if @proj_prefs %>

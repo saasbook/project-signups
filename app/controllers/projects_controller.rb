@@ -12,6 +12,10 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def assignments
+    @projects = Project.joins(:assigned_group).where("projects.id = groups.assigned_project_id")
+  end
+
   # GET /projects/1
   # GET /projects/1.json
   def show
