@@ -1,47 +1,47 @@
 <%= form_for(@project) do |f| %>
-	<% if @project.errors.any? %>
-	<div id="error_explanation">
-		<h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+  <% if @project.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
 
-		<ul>
-		<% @project.errors.full_messages.each do |msg| %>
-		<li><%= msg %></li>
-		<% end %>
-		</ul>
-	</div>
-	<% end %>
+    <ul>
+    <% @project.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
 
-	<div class="field">
-	<%= f.label :title %><br />
-	<%= f.text_field :title %>
-	</div>
-	
-	<div class="field">
-	<%= f.label :short_description %><br />
+  <div class="field">
+  <%= f.label :title %><br />
+  <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+  <%= f.label :short_description %><br />
   <%= f.text_field :short_description %>
-	</div>
+  </div>
 
-	<div class="field">
-	<%= f.label :description %><br />
-	<%= f.text_area :description, :size => "75x10" %>
-	</div>
+  <div class="field">
+  <%= f.label :description %><br />
+  <%= f.text_area :description, :size => "75x10" %>
+  </div>
 
-	<div class="field">
-	<%= f.label :location %><br />
+  <div class="field">
+  <%= f.label :location %><br />
   <%= f.text_field :location %>
-	</div>
-	
-	<div class="field">
-	<%= f.check_box :private %> <%= f.label :private %>
-	</div>
-	
-	<div class="field last">
-	<%= label_tag :group_id %><br/>
-	<%= text_field_tag :group_id, @group_id %>
-	</div>
-	
-	<div class="actions">
-	<%= f.submit "Update Project", :class => "btn" %>
-	</div>
+  </div>
+
+  <div class="field">
+  <%= f.check_box :private %> <%= f.label :private %>
+  </div>
+
+  <div class="field last">
+  <%= label_tag :group_id %><br/>
+  <%= text_field_tag :group_id, @group_id %>
+  </div>
+
+  <div class="actions">
+  <%= f.submit "Update Project", :class => "btn" %>
+  </div>
 
 <% end %>
