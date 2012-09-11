@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120911013242) do
+ActiveRecord::Schema.define(:version => 20120911031058) do
 
   create_table "admin_settings", :force => true do |t|
     t.integer  "max_project_preferences"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(:version => 20120911013242) do
     t.datetime "updated_at"
     t.boolean  "private",           :default => false
     t.string   "location"
-    t.string   "short_description"
+    t.text     "short_description"
   end
 
   create_table "self_projects", :force => true do |t|
