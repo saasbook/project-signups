@@ -1,5 +1,19 @@
 ProjectSignups::Application.routes.draw do
 
+  # Authentication  
+  devise_for :admins, 
+  :controllers => { :registrations => "registrations", :sessions => "sessions" }, 
+  :path_names => { :sign_in => "signin", :sign_out => "signout", :sign_up => "register" }
+  
+  devise_scope :admin do
+    get "signin" => "sessions#new", :as => :sign_in 
+    get "signout" => "sessions#destroy", :as => :sign_out
+    get "admins/register" => "registrations#new", :as => :sign_up
+    post "admins/register" => "registrations#create", :as => :register
+  end
+
+
+
   resources :project_preferences
 
   resources :projects
@@ -13,11 +27,9 @@ ProjectSignups::Application.routes.draw do
 
   resources :signups
 
-  # Authentication
-  get 'login' => 'sessions#new', :as => :login
-  post 'login' => 'sessions#create'
-  match 'logout' => 'sessions#destroy', :as => :logout
-
+  get 'admins/settings' => 'admin_settings#index', :as => :admin_settings
+  match 'admins/settings/update' => 'admin_settings#update', :as => :admin_update_settings
+  
   root :to => "home#index"
 
   # The priority is based upon order of creation:

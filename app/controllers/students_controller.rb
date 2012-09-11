@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-  before_filter :authorize!
+  before_filter :authenticate_admin!
 
   # GET /students
   # GET /students.json

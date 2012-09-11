@@ -1,0 +1,12 @@
+<div class="container admin-settings">
+	<h1>Admin Settings</h1>
+
+	<%= form_for @settings, :url => admin_update_settings_path do |f| %>
+	<div class="field last">
+		<%= f.label :"Maximum Project Preferences" %>	<%= f.number_field :max_project_preferences, :value => @max_project_preferences, :min => 1, :max => 10 %>
+	</div>
+	<div class="actions">
+		<%= f.submit "Save Preferences", :class => "btn" %>
+	</div>
+	<% end %>
+</div>

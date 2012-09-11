@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_filter :authorize!, :except => [:index, :show, :assignments]
+  before_filter :authenticate_admin!, :except => [:index, :show, :assignments]
 
   # GET /projects
   # GET /projects.json

@@ -1,46 +1,53 @@
-<h1>CS169 Project Signup Form</h1>
-<%= form_tag(signups_path) do %>
-  <p class="important">
-    The deadline to sign up is Thursday Feb 16, 11:59 PM PST.
-  </p>
+<div class="container project-signup">
+	
+	<h1>CS169 Project Signup Form</h1>
+	<%= form_tag(signups_path) do %>
+		<p class="important">
+			The deadline to sign up is Thursday Feb 16, 11:59 PM PST.
+		</p>
 
-  <div>
-    <%= link_to 'See all groups', groups_path %>
-  </div>
+		<div>
+			<%= link_to 'See all groups', groups_path %>
+		</div>
 
-  <div class="field">
-    <%= label_tag 'group_id', 'Group Number:' %>
-    <%= select_tag 'group_id', options_from_collection_for_select(@groups, 'id', 'select_name') %>
-  </div>
-
-  <div>
-    <%= link_to 'See all Projects', projects_path %>
-  </div>
-
-  <p>
-    We encourage you to pick external projects over your own. Please only
-    select an internal project if you were the group that proposed it to us.
-    Internal projects have been approved under the condition that you find an
-    external, non-technical customer to work with.
-  </p>
+		<div class="field">
+			<%= label_tag 'group_id', 'Group Number:' %>
+			<%= select_tag 'group_id', options_from_collection_for_select(@groups, 'id', 'select_name') %>
+		</div>
 
 
-  <% @preference_levels.each do |level| %>
-    <div class="field">
-      <%= label_tag "choice[#{level}]", "#{ActiveSupport::Inflector.ordinalize(level)} Choice:" %>
-      <%= collection_select("choice", level, @projects, :id, :title, :include_blank => true, :selected => @choices[level.to_s]) %>
-    </div>
-  <% end %>
+		<div>
+			<%= link_to 'See all Projects', projects_path %>
+		</div>
+		
+		<p>
+			We encourage you to pick external projects over your own. Please only
+			select an internal project if you were the group that proposed it to us.
+			Internal projects have been approved under the condition that you find an
+			external, non-technical customer to work with.
+		</p>
 
-  <% if false %>
-  <div class="field">
-    <div> This is not implemented yet </div>
-    <%= label_tag "sid", "SID:" %>
-    <%= text_field_tag "sid" %>
-  </div>
-  <% end %>
 
-  <div class="field">
-    <%= submit_tag 'Submit' %>
-  </div>
-<% end %>
+		<div class="preference-levels-wrapper">
+			<% @preference_levels.each do |level| %>
+			<div class="field">
+				<%= label_tag "choice[#{level}]", "#{ActiveSupport::Inflector.ordinalize(level)} Choice:" %>
+				<%= collection_select("choice", level, @projects, :id, :title, :include_blank => true, :selected => @choices[level.to_s]) %>
+			</div>
+			<% end %>
+		</div>
+
+		<% if false %>
+		<div class="field">
+			<div> This is not implemented yet </div>
+			<%= label_tag "sid", "SID:" %>
+			<%= text_field_tag "sid" %>
+		</div>
+		<% end %>
+
+		<div class="actions">
+			<%= submit_tag 'Submit', :class => "btn" %>
+		</div>
+	<% end %>
+
+</div>

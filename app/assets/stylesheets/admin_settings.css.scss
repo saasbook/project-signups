@@ -1,0 +1,21 @@
+// Place all the styles related to the Projects controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.container.admin-settings {
+	h1 {
+		margin: 15px 0;
+	}
+	
+	.field {
+		label {
+			width: 250px;
+			text-align: right;
+		}
+	}
+	
+	.actions {
+		padding-left: 17px;
+	}
+}

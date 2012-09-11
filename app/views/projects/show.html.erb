@@ -1,17 +1,27 @@
-<p id="notice"><%= notice %></p>
+<div class="container project">
+	
+	<div class="project-item">
+	
+		<div class="facet">
+			<h2>Title</h2>
+			<div class="title"><%= @project.title %></div>
+		</div>
+	
+	
+		<div class="facet">
+			<h2>Description</h2>
+			<div class="description">
+				<%= raw sanitize(@project.description).gsub(/\n/, '<br />') %>
+			</div>
+		</div>
+	
+	</div>
+	<%= link_to 'Back to All Projects', projects_path %>
+	
+	<% if admin_signed_in? %>
+	<div class="project-edit-wrapper">
+	  	<%= link_to 'Edit Project', edit_project_path(@project), :class => "btn" %>
+	</div>
+	<% end %>
 
-<p>
-  <b>Title:</b>
-  <%= @project.title %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= raw sanitize(@project.description).gsub(/\n/, '<br />') %>
-</p>
-
-
-<% if @authorized %>
-  <%= link_to 'Edit', edit_project_path(@project) %> |
-<% end %>
-<%= link_to 'Back', projects_path %>
+</div>

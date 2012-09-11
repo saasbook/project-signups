@@ -5,7 +5,7 @@
     <tr>
       <th>Number</th>
       <th>Members</th>
-      <% if @authorized %>
+      <% if admin_signed_in? %>
         <th></th>
         <th></th>
         <th></th>
@@ -17,13 +17,13 @@
   <tr>
     <td><%= link_to group.id, group %></td>
     <td><%= group.student_names.join(", ") %></td>
-    <% if @authorized %>
+    <% if admin_signed_in? %>
       <td><%= link_to 'Show', group %></td>
       <td><%= link_to 'Edit', edit_group_path(group) %></td>
       <td><%= link_to 'Destroy', group, confirm: 'Are you sure?', method: :delete %></td>
     <% end %>
   </tr>
-  <% if @authorized %>
+  <% if admin_signed_in? %>
     <tr>
       <td colspan="5"><%= group.students.map{|s|s.email}.join(", ") %></td>
     </tr>
@@ -33,6 +33,6 @@
 
 <br />
 
-<% if @authorized %>
+<% if admin_signed_in? %>
   <%= link_to 'New Group', new_group_path %>
 <% end %>

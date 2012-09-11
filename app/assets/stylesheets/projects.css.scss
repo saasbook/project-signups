@@ -1,3 +1,69 @@
 // Place all the styles related to the Projects controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.container.projects {
+	.heading {
+		text-align: center;
+		margin: 10px 0;
+	}
+	
+	.project-item {
+		padding: 15px 5px;
+		
+		border-bottom: 1px solid #ccc;
+		
+		-moz-box-shadow: 0px 1px 1px #fff;
+		-webkit-box-shadow: 0px 1px 1px #fff;
+		box-shadow: 0px 1px 1px #fff;
+		
+		&:last-child {
+			border-bottom: 0;
+			-moz-box-shadow: 0 0 0;
+			-webkit-box-shadow: 0 0 0;
+			box-shadow: 0 0 0;
+		}
+		
+		h3.title {
+			margin: 5px 0 10px 0;
+			color: #000;
+			font-size: 20px;
+		}
+		
+		.description {
+			&.inactive {
+				display: none;
+			}
+		}
+		
+		.controls {
+			margin-top: 10px;
+		}
+	}
+	
+	.project-new {
+		padding: 15px 5px;
+	}
+}
+
+.container.project {
+	position: relative;
+	.facet {
+		margin-bottom: 30px;
+	}
+	h2 {
+		margin: 10px 0;
+	}
+	.project-edit-wrapper {
+		position: absolute;
+		top: 0;
+		right: 50px;
+	}
+}
+
+.container.project-edit, .container.project-new {
+	h1 {
+		margin: 10px 0;
+	}
+}

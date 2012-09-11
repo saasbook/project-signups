@@ -1,5 +1,5 @@
 class ProjectPreferencesController < ApplicationController
-  before_filter :authorize!
+  before_filter :authenticate_admin!
 
   # GET /project_preferences
   # GET /project_preferences.json

@@ -1,27 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ProjectSignups</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+	<title>ProjectSignups</title>
+	<%= stylesheet_link_tag    "application" %>
+	<%= javascript_include_tag "application" %>
+	<%= csrf_meta_tags %>
+	
+	<script type="text/javascript">
+	$().ready(function() {
+		var hideFlashTimeout;
+		
+		function showFlashMessage(message, type) {
+			if (type == 'notice') {
+				$('.flash-messages .notice').text(message).show();
+			} else if (type == 'error') {
+				$('.flash-messages .error').text(message).show();
+			}
+			$('.flash-messages').slideDown();
+			hideFlashTimeout = setTimeout(function() {
+				$('.flash-messages').slideUp();
+			}, 5000);
+		}
+		
+		$('.flash-messages').live('click', function(e) {
+			clearTimeout(hideFlashTimeout);
+			$(this).slideUp();
+		});
+		
+		<% if flash[:notice].present? %>
+			showFlashMessage('<%= escape_javascript(flash[:notice]) %>', 'notice');
+		<% elsif flash[:error].present? %>
+			showFlashMessage('<%= escape_javascript(flash[:error]) %>', 'error');
+		<% end %>
+		
+	});
+	</script>
+
+	
 </head>
+
 <body>
-  <div id="wrapper">
-    <%= link_to "Home", :root %>
-    <div id="messages">
-      <p class="notice">
-        <%= flash[:notice] %>
-      </p>
-      <% unless flash[:error].blank? %>
-      <p class="error">
-        <%= flash[:error] %>
-      </p>
-      <% end %>
-    </div>
 
-  <%= yield %>
-
-  </div>
+	<div class="nav-bar-container">
+		<div class="nav-bar">
+		<%= link_to "CS169 Project Website", root_path, :class => "heading home" %>
+		
+			<% if admin_signed_in? %>
+			<ul class="admin-controls">
+				<li><%= link_to "Settings", admin_settings_path %></li>
+				<li><%= link_to "Logout", sign_out_path %></li>
+			</ul>
+			<% end %>
+		</div>
+	</div>
+	
+	<div class="wrapper">
+		<div class="flash-messages">
+			<p class="notice"></p>
+			<p class="error"></p>
+	    </div>
+	
+		<div class="content">
+	  	<%= yield %>
+		</div>
+	</div>
 </body>
+
 </html>

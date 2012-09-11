@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_filter :authorize!, :except => [:index, :show]
+  before_filter :authenticate_admin!, :except => [:index, :show]
 
   # GET /groups
   # GET /groups.json

@@ -6,10 +6,6 @@
  *= require_tree . 
 */
 
-#wrapper {
-  width: 800px;
-  margin: auto;
-}
 
 table#projects thead tr {
       background-color: #EEEEEE;
@@ -25,10 +21,6 @@ table#groups thead tr {
 
 table#groups tr:nth-child(even) {
       background-color: #F0F0F0;
-}
-
-ul.plain {
-  list-style: none;
 }
 
 p.important {

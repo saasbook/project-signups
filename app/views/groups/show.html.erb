@@ -9,7 +9,7 @@
   <%= @proj.title unless @proj.nil? %>
 </div>
 
-<% if @authorized %>
+<% if admin_signed_in? %>
   <% if @proj_prefs %>
   <div>
     <b>Project Preferences</b>

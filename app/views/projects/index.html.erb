@@ -1,40 +1,59 @@
-<h1>Listing projects</h1>
+<div class="container projects">
+	
+	<h1 class="heading">Listing projects</h1>
 
-<table id="projects">
-  <!--thead>
-    <tr>
-      <th>Title</th>
-      <th>Description (for full description, click on title)</th>
-      <% if @authorized %>
-        <th></th>
-        <th></th>
-        <th></th>
-      <% end %>
-    </tr>
-  </thead-->
+	  <!--thead>
+	    <tr>
+	      <th>Title</th>
+	      <th>Description (for full description, click on title)</th>
+	      <% if admin_signed_in? %>
+	        <th></th>
+	        <th></th>
+	        <th></th>
+	      <% end %>
+	    </tr>
+	  </thead-->
 
-  <tbody>
-  <% @projects.each do |project| %>
-    <tr>
-      <td>
-        <h3><%= link_to project.title, project %></h3>
-        <%= truncate project.description, :length => 500 %>
-        <%= link_to 'See More', project %>
-      <% if @authorized %>
-        <div>
-          <br />
-          <%= link_to 'Edit', edit_project_path(project) %>
-          <%= link_to 'Destroy', project, confirm: 'Are you sure?', method: :delete %>
-        </div>
-      <% end %>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+	<div class="projects-list">
+	<% @projects.each do |project| %>
+		<div class="project-item" data-project-id="<%= project.id %>">
+			<h3 class="title"><%= link_to project.title, project %></h3>
+			<div class="description">
+				<%= truncate project.description, :length => 500, :omission => '...' %>
+				<% if project.description.length > 500 %>
+					<%= link_to 'More', project, :class => "see-more" %>
+				<% end %>
+			</div>	
+			<div class="description inactive">
+				<%= project.description %>
+				<%= link_to 'Less', project, :class => "see-less" %>
+			</div>
+			<% if admin_signed_in? %>
+			<div class="controls">
+				<%= link_to 'Edit', edit_project_path(project), :class => "btn first" %><%= link_to 'Destroy', project, :class => "btn last", confirm: 'Are you sure?', method: :delete %>
+			</div>
+			<% end %>
+		</div>
+	<% end %>
+	</div>
 
-<br />
+	<% if admin_signed_in? %>
+		<div class="project-new">
+			<%= link_to 'Create a New Project', new_project_path, :class => "btn" %>
+		</div>
+	<% end %>
 
-<% if @authorized %>
-  <%= link_to 'New Project', new_project_path %>
-<% end %>
+</div>
+
+<script type="text/javascript">
+	$().ready(function() {
+		$('.description').live('click', function(e) {
+			var $target = $(e.target);
+			if ($target.hasClass('see-more') || $target.hasClass('see-less')) {
+				$(this).closest('.project-item').find('.description').toggleClass('inactive');
+				e.preventDefault();
+			}
+		});
+		
+	})
+</script>

@@ -2,14 +2,14 @@ class SignupsController < ApplicationController
   def new
     @groups = Group.all
     @projects = Project.all
-    @preference_levels = 1.upto(ProjectPreference::MAX_PREFERENCE)
+    @preference_levels = 1.upto(AdminSetting.first.max_project_preferences)
     @choices = {}
   end
 
   def create
     @groups = Group.all
     @projects = Project.all
-    @preference_levels = 1.upto(ProjectPreference::MAX_PREFERENCE)
+    @preference_levels = 1.upto(AdminSetting.first.max_project_preferences)
 
     @choices = params[:choice]
     group_id = params[:group_id]

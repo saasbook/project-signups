@@ -1,12 +1,56 @@
-<h1>CS169 Project Website</h1>
+<div class="container home">
+	<div class="menu-wrapper">
+	<h2>Projects & Groups</h2>
+	<ul class="plain">
+		<%= link_to projects_path do %>
+		<li class="menu-item">
+			<div class="icon icon-projects"></div>
+			See All Projects
+		</li>
+		<% end %>
 
-<ul class="plain">
-  <li> <%= link_to "Project Signups", new_signup_path %> </li>
-  <li> <%= link_to "Projects", projects_path %> </li>
-  <li> <%= link_to "Groups", groups_path %> </li>
-  <li> <%= link_to "Project Assignments", project_assignments_path %> </li>
-<% if @authorized %>
-  <li> <%= link_to "Students", students_path %> </li>
-  <li> <%= link_to "Project Preferences", project_preferences_path %> </li>
-<% end %>
-</ul>
+		<%= link_to groups_path do %>		
+		<li class="menu-item"> 
+			<div class="icon icon-groups"></div>
+			See All Groups
+		</li>
+		<% end %>
+		
+		<%= link_to new_signup_path do %>		
+		<li class="menu-item"> 
+			<div class="icon icon-signup"></div>
+			Project Signup
+		</li>
+		<% end %>
+		
+		<%= link_to project_assignments_path do %>
+		<li class="menu-item"> 
+			<div class="icon icon-project-assignment"></div>
+			Project Assignments
+		</li>
+		<% end %>
+	</ul>
+	</div>
+
+	<% if admin_signed_in? %>
+	<div class="menu-wrapper">
+	<h2>Admin</h2>
+	<ul class="plain">
+		<%= link_to students_path do %> 
+		<li class="menu-item"> 
+			<div class="icon icon-students"></div>
+			Students
+		</li>
+		<% end %>
+		
+		<%= link_to project_preferences_path do %> 
+		<li class="menu-item"> 
+			<div class="icon icon-project-preferences"></div>
+			Project Preferences
+		</li>
+		<% end %>
+	</ul>
+	</div>
+	<% end %>
+	
+</div>
