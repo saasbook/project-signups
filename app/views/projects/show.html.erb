@@ -7,12 +7,22 @@
 			<div class="title"><%= @project.title %></div>
 		</div>
 	
+		<div class="facet">
+			<h2>Short Description</h2>
+			<div class="description"><%= @project.short_description %></div>
+		</div>
+	
 	
 		<div class="facet">
 			<h2>Description</h2>
 			<div class="description">
 				<%= raw sanitize(@project.description).gsub(/\n/, '<br />') %>
 			</div>
+		</div>
+
+		<div class="facet">
+			<h2>Location</h2>
+			<div class="description"><%= @project.location %></div>
 		</div>
 	
 	</div>

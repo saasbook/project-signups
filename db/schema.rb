@@ -56,7 +56,9 @@ ActiveRecord::Schema.define(:version => 20120911010347) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "private",     :default => false
+    t.boolean  "private",           :default => false
+    t.string   "location"
+    t.string   "short_description"
   end
 
   create_table "self_projects", :force => true do |t|

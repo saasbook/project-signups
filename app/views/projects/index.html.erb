@@ -19,7 +19,7 @@
 		<div class="project-item" data-project-id="<%= project.id %>">
 			<h3 class="title"><%= link_to project.title, project %></h3>
 			<div class="description">
-				<%= truncate project.description, :length => 500, :omission => '...' %>
+        <%= project.short_description %>
 				<% if project.description.length > 500 %>
 					<%= link_to 'More', project, :class => "see-more" %>
 				<% end %>

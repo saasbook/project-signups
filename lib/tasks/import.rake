@@ -36,17 +36,31 @@ namespace :import do
       headers = []
 
       ActiveRecord::Base.transaction do
-        CSV.foreach(args[:csv_file]) do |row|
+        CSV.foreach(args[:csv_file], encoding: "UTF-8") do |row|
           if skip_first
             headers = row
             skip_first = false
             next
           end
 
-          title = row[1] # This is actually just the orginazition name
-          description = [headers[15], row[15], headers[16], row[16], headers[17], row[17], headers[18], row[18]].join("\n\n")
+          next if row[1].blank? # skip blank rows and fake title rows
 
-          Project.create! title: title, description: description
+          title = row[headers.index("Full Organization Name")] # This is actually just the orginazition name
+          location = row[headers.index("Organization Address")]
+          short_description = row[headers.index("In one sentence, please explicitly summarize the goals of the project.")]
+          description = ["Mission Statement",
+                         "What current problems does your organization face? Which of these issues could be helped with web-based software?",
+                         "What type of web-based software could benefit your organization?",
+                         "Please provide a two-paragraph description of the software that would most benefit your organization."].map do |col|
+            datum = row[headers.index(col)]
+            if datum.blank?
+              ""
+            else
+              col + "\n\n" + datum
+            end
+          end.join("\n\n")
+
+          Project.create! title: title, description: description, short_description: short_description, location: location
         end
       end
 
