@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120911010347) do
+ActiveRecord::Schema.define(:version => 20120911013242) do
 
   create_table "admin_settings", :force => true do |t|
     t.integer  "max_project_preferences"
