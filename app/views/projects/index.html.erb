@@ -25,7 +25,7 @@
         <% end %>
       </div>
       <div class="description inactive">
-        <%= project.description %>
+        <%= raw sanitize(@project.description).gsub(/\n/, '<br />') %>
         <%= link_to 'Less', project, :class => "see-less" %>
       </div>
       <% if admin_signed_in? %>
