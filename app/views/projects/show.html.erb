@@ -9,13 +9,13 @@
 
     <div class="facet">
       <h2>Short Description</h2>
-      <div class="description"><%= @project.short_description %></div>
+      <div class="description"><%= auto_link(@project.short_description) %></div>
     </div>
 
     <div class="facet">
       <h2>Description</h2>
       <div class="description">
-        <%= raw sanitize(@project.description).gsub(/\n/, '<br />') %>
+        <%= raw sanitize(auto_link(@project.description)).gsub(/\n/, '<br />') %>
       </div>
     </div>
 

@@ -19,13 +19,11 @@
     <div class="project-item" data-project-id="<%= project.id %>">
       <h3 class="title"><%= link_to project.title, project %></h3>
       <div class="description">
-        <%= project.short_description %>
-        <% if project.description.length > 500 %>
-          <%= link_to 'More', project, :class => "see-more" %>
-        <% end %>
+        <%= auto_link(project.short_description) %>
+        <%= link_to 'More', project, :class => "see-more" %>
       </div>
       <div class="description inactive">
-        <%= raw sanitize(project.description).gsub(/\n/, '<br />') %>
+        <%= raw sanitize(auto_link(project.description)).gsub(/\n/, '<br />') %>
         <%= link_to 'Less', project, :class => "see-less" %>
       </div>
       <% if admin_signed_in? %>

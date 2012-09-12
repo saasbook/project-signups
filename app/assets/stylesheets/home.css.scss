@@ -1,119 +1,119 @@
 
 .nav-bar-container {
-	
-	background-color: #000;
-	padding: 20px;
-	border-bottom: 1px solid #ccc;
-	
-	-moz-box-shadow: 0px 1px 2px #aaa;
-	-webkit-box-shadow: 0px 1px 2px #aaa;
-	box-shadow: 0px 1px 2px #aaa;
-	
-	.nav-bar {
-		width: 960px;
-		margin: auto;
-		
-		ul.admin-controls {
-			float: right;
-			list-style-type: none;
-			li {
-				float: left;
-				margin: 0 10px;
-			}
-			a {
-				color: #fff;
-			}
-		}
-	}
-	
-	a.heading.home {
-		color: #fff;
-		font-size: 30px;
-		text-decoration: none;
-	}
-	
+  
+  background-color: #000;
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+  
+  -moz-box-shadow: 0px 1px 2px #aaa;
+  -webkit-box-shadow: 0px 1px 2px #aaa;
+  box-shadow: 0px 1px 2px #aaa;
+  
+  .nav-bar {
+    width: 960px;
+    margin: auto;
+    
+    ul.admin-controls {
+      float: right;
+      list-style-type: none;
+      li {
+        float: left;
+        margin: 0 10px;
+      }
+      a {
+        color: #fff;
+      }
+    }
+  }
+  
+  a.heading.home {
+    color: #fff;
+    font-size: 30px;
+    text-decoration: none;
+  }
+  
 }
 
 .container.home {
-	h2 {
-		text-align: center;
-		margin: 5px 0 10px;
-	}
-	
-	ul.plain {
-		margin-bottom: 20px;
-		list-style: none;
-		text-align: center;
-		
-		a {
-			text-decoration: none;
-			li.menu-item {
-				display: inline-block;
-				margin: 20px;
-				.icon {
-					width: 50px;
-					height: 50px;
-					margin: auto;
-					text-align: center;
-					
-					&.icon-projects {
-						background: url('icon-projects.png');
-						&:hover {
-							background: url('icon-projects-hover.png');
-						}
-					}
-					
-					&.icon-groups {
-						background: url('icon-groups.png');
-						&:hover {
-							background: url('icon-groups-hover.png');
-						}
-					}
-					
-					&.icon-signup {
-						background: url('icon-signup.png');
-						&:hover {
-							background: url('icon-signup-hover.png');
-						}
-					}
-					
-					&.icon-project-assignment {
-						background: url('icon-project-assignment.png');
-						&:hover {
-							background: url('icon-project-assignment-hover.png');
-						}
-					}
-					
-					&.icon-students {
-						background: url('icon-students.png');
-						&:hover {
-							background: url('icon-students-hover.png');
-						}
-					}
-					
-					&.icon-project-preferences {
-						background: url('icon-project-preferences.png');
-						&:hover {
-							background: url('icon-project-preferences-hover.png');
-						}
-					}
-					
-				}
-			}
-		}
-	}
-	
-	.menu-wrapper {
-		margin: 30px 0 50px 0;
-	}
+  h2 {
+    text-align: center;
+    margin: 5px 0 10px;
+  }
+  
+  ul.plain {
+    margin-bottom: 20px;
+    list-style: none;
+    text-align: center;
+    
+    a {
+      text-decoration: none;
+      li.menu-item {
+        display: inline-block;
+        margin: 20px;
+        .icon {
+          width: 50px;
+          height: 50px;
+          margin: auto;
+          text-align: center;
+          
+          &.icon-projects {
+            background: url('icon-projects.png');
+            &:hover {
+              background: url('icon-projects-hover.png');
+            }
+          }
+          
+          &.icon-groups {
+            background: url('icon-groups.png');
+            &:hover {
+              background: url('icon-groups-hover.png');
+            }
+          }
+          
+          &.icon-signup {
+            background: url('icon-signup.png');
+            &:hover {
+              background: url('icon-signup-hover.png');
+            }
+          }
+          
+          &.icon-project-assignment {
+            background: url('icon-project-assignment.png');
+            &:hover {
+              background: url('icon-project-assignment-hover.png');
+            }
+          }
+          
+          &.icon-students {
+            background: url('icon-students.png');
+            &:hover {
+              background: url('icon-students-hover.png');
+            }
+          }
+          
+          &.icon-project-preferences {
+            background: url('icon-project-preferences.png');
+            &:hover {
+              background: url('icon-project-preferences-hover.png');
+            }
+          }
+          
+        }
+      }
+    }
+  }
+  
+  .menu-wrapper {
+    margin: 30px 0 50px 0;
+  }
 }
 
 .wrapper {
-	padding: 10px 0;
-	position: relative;
-	margin: auto;
-	.content {
-		width: 960px;
-		margin: auto;
-	}
+  padding: 10px 0;
+  position: relative;
+  margin: auto;
+  .content {
+    width: 960px;
+    margin: auto;
+  }
 }
