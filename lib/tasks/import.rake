@@ -6,22 +6,32 @@ namespace :import do
       skip_first = true
 
       ActiveRecord::Base.transaction do
-        CSV.foreach(args[:csv_file]) do |row|
+        CSV.foreach(args[:csv_file], encoding: "UTF-8") do |row|
           if skip_first
             skip_first = false
             next
           end
           g = Group.create!
-          row.each do |person|
-            nick_name = nil
-            if person =~ /\((.*)\)/
-              nick_name = $1
-              person.gsub!(/\(.*\)/, '')
-            end
-            first_name, last_name = person.split[0..-2].join(" "), person.split[-1].strip
-            params = {first_name: first_name, last_name: last_name, nick_name: nick_name, group: g}
+          max_students = 5
+          (0...max_students).each do |i|
+            offset = i * 3 + 1 #skip timestamp column
+            name, email = row[offset..(offset+1)]
+            break if name.blank?
+            first_name, last_name = name.split[0..-2].join(" "), name.split[-1].strip
+            params = {first_name: first_name, last_name: last_name, email: email, group: g}
             Student.create!(params)
           end
+          #row.each do |person|
+          #  nick_name = nil
+          #  if person =~ /\((.*)\)/
+          #    nick_name = $1
+          #    person.gsub!(/\(.*\)/, '')
+          #  end
+          #  first_name, last_name = person.split[0..-2].join(" "), person.split[-1].strip
+          #  #params = {first_name: first_name, last_name: last_name, nick_name: nick_name, group: g}
+          #  params = {first_name: first_name, last_name: last_name, group: g}
+          #  Student.create!(params)
+          #end
         end
       end
 
