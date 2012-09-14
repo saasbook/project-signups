@@ -68,7 +68,7 @@ namespace :import do
             else
               col + "\n\n" + datum
             end
-          end.join("\n\n")
+          end.join("\n\n").strip
 
           Project.create! title: title, description: description, short_description: short_description, location: location
         end
