@@ -8,8 +8,8 @@ ProjectSignups::Application.routes.draw do
   devise_scope :admin do
     get "signin" => "sessions#new", :as => :sign_in 
     get "signout" => "sessions#destroy", :as => :sign_out
-    get "admins/register" => "registrations#new", :as => :sign_up
-    post "admins/register" => "registrations#create", :as => :register
+    #get "admins/register" => "registrations#new", :as => :sign_up
+    #post "admins/register" => "registrations#create", :as => :register
   end
 
 
