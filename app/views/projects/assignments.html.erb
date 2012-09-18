@@ -16,15 +16,11 @@
   <tbody>
   <% @projects.each do |project| %>
     <tr>
-      <td><%= link_to project.title, project %>:</td>
-      <td><%= project.assigned_group.student_names.join(", ") %></td>
+      <td><%= project.assigned_group.id %>: <%= project.assigned_group.student_names.join(", ") %></td>
+      <td><%= link_to project.title, project %></td>
     </tr>
   <% end %>
   </tbody>
 </table>
 
 <br />
-
-<% if admin_signed_in? %>
-  <%= link_to 'New Project', new_project_path %>
-<% end %>
