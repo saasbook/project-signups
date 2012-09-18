@@ -14,10 +14,10 @@
   </thead-->
 
   <tbody>
-  <% @projects.each do |project| %>
+  <% @groups.each do |group| %>
     <tr>
-      <td><%= project.assigned_group.id %>: <%= project.assigned_group.student_names.join(", ") %></td>
-      <td><%= link_to project.title, project %></td>
+      <td><%= group.id %>: <%= group.student_names.join(", ") %></td>
+      <td><%= link_to group.assigned_project.title, group.assigned_project %></td>
     </tr>
   <% end %>
   </tbody>
