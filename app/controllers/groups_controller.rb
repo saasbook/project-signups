@@ -41,7 +41,7 @@ class GroupsController < ApplicationController
   # GET /groups/1/edit
   def edit
     @group = Group.find(params[:id])
-    @projects = Project.all
+    @projects = Project.order("id ASC")
   end
 
   # POST /groups
