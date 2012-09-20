@@ -16,7 +16,7 @@
   <tbody>
   <% @groups.each do |group| %>
     <tr>
-      <td><%= group.id %>: <%= group.student_names.join(", ") %></td>
+      <td><%= link_to group.id, group %>: <%= group.student_names.join(", ") %></td>
       <td><%= link_to group.assigned_project.title, group.assigned_project %></td>
     </tr>
   <% end %>
