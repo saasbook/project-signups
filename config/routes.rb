@@ -27,8 +27,11 @@ ProjectSignups::Application.routes.draw do
 
   resources :signups
 
-  get 'admins/settings' => 'admin_settings#index', :as => :admin_settings
-  match 'admins/settings/update' => 'admin_settings#update', :as => :admin_update_settings
+  resources :team_evaluations
+
+  match 'admin' => 'admin#index', :as => :admin
+  match 'admin/update_settings' => 'admin#update', :as => :admin_update_settings
+  match 'admin/update_team_evaluation_path' => 'admin#update_team_evaluation', :as => :admin_update_team_evaluation
   
   root :to => "home#index"
 

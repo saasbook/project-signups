@@ -5,38 +5,6 @@
 	<%= stylesheet_link_tag    "application" %>
 	<%= javascript_include_tag "application" %>
 	<%= csrf_meta_tags %>
-	
-	<script type="text/javascript">
-	$().ready(function() {
-		var hideFlashTimeout;
-		
-		function showFlashMessage(message, type) {
-			if (type == 'notice') {
-				$('.flash-messages .notice').text(message).show();
-			} else if (type == 'error') {
-				$('.flash-messages .error').text(message).show();
-			}
-			$('.flash-messages').slideDown();
-			hideFlashTimeout = setTimeout(function() {
-				$('.flash-messages').slideUp();
-			}, 5000);
-		}
-		
-		$('.flash-messages').live('click', function(e) {
-			clearTimeout(hideFlashTimeout);
-			$(this).slideUp();
-		});
-		
-		<% if flash[:notice].present? %>
-			showFlashMessage('<%= escape_javascript(flash[:notice]) %>', 'notice');
-		<% elsif flash[:error].present? %>
-			showFlashMessage('<%= escape_javascript(flash[:error]) %>', 'error');
-		<% end %>
-		
-	});
-	</script>
-
-	
 </head>
 
 <body>
@@ -47,7 +15,7 @@
 		
 			<% if admin_signed_in? %>
 			<ul class="admin-controls">
-				<li><%= link_to "Settings", admin_settings_path %></li>
+				<li><%= link_to "Settings", admin_path %></li>
 				<li><%= link_to "Logout", sign_out_path %></li>
 			</ul>
 			<% end %>
@@ -64,6 +32,15 @@
 	  	<%= yield %>
 		</div>
 	</div>
+
+
+	<script type="text/javascript">
+    <% if flash[:notice].present? %>
+      showFlashMessage('<%= escape_javascript(flash[:notice]) %>', 'notice');
+    <% elsif flash[:error].present? %>
+      showFlashMessage('<%= escape_javascript(flash[:error]) %>', 'error');
+    <% end %>
+	</script>
 </body>
 
 </html>

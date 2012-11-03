@@ -1,0 +1,138 @@
+<%= form_tag team_evaluations_path(), :remote => true do %>
+  <%= hidden_field_tag :group_id, @group.id %>
+  <%= hidden_field_tag :iteration_id, @iteration.id %>
+  <%= hidden_field_tag :grader_id, @grader.id %>
+
+  <% @other_group_students.each_with_index do |student, index| %>
+    <div class="evaluation-module-wrapper">
+      <div class="evaluation-module" data-student-id="<%= student.id %>">
+        <h4 class="student-name"><%= student.full_name %></h4>
+
+        <div class="scores-container select-container submodule">
+          <h4 class="submodule-heading">Score</h4>
+
+          <div class="select-wrapper">
+          <% (0..10).each do |score| %>
+            <div class="score-wrapper">
+              <div class="score-input">
+                <%= radio_button_tag :"student-#{student.id}-score", score %>
+              </div>
+              <div class="score-label">
+                <%= score %>
+              </div>
+            </div>
+          <% end %>
+          </div>
+        </div>
+
+        <div class="justification-container submodule">
+          <h4 class="submodule-heading">Justification</h4>
+          <%= text_area_tag :"student-#{student.id}-comment", "", :size => "60x6", :placeholder => "Please justify" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= submit_tag "Submit", :id => "evaluation-submit", :class => "btn", :disabled => "disabled", :onclick => "return beforeSubmit();" %>
+    <span class="activity-indicator inactive">
+      <%= image_tag "activity.gif" %>
+    </span>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  var $submitBtn          = $('#evaluation-submit'),
+      $activityIndicator  = $('.activity-indicator'),
+      EvaluationFormData  = EvaluationForm['formData'];
+
+      EvaluationForm['studentIds']  = '<%= @other_group_students.map(&:id).join(",") %>'.split(','),
+      EvaluationForm['numStudents'] = '<%= @other_group_students.size %>';
+      EvaluationForm.beforeSubmit = function() {
+        var studentIds      = this['studentIds'],
+            numStudents     = this['numStudents'],
+            tempStudentId,
+            tempScore,
+            tempComment,
+            tempLowestId    = 999;
+
+        for (var i = 0; i < numStudents; i++) {
+          tempStudentId = studentIds[i];
+          tempScore     = $('input[name="student-'+tempStudentId+'-score"]:checked').val();
+          tempComment   = $('textarea[name="student-'+tempStudentId+'-comment"]').val();
+          if (tempScore === undefined) {
+            if (tempStudentId < tempLowestId) {
+              tempLowestId = tempStudentId;
+            }
+            $('input[name="student-'+tempStudentId+'-score"]').closest('.submodule').find('h4').addClass('error');
+            $('input[name="student-'+tempStudentId+'-score"]').closest('.submodule').find('.select-wrapper').addClass('error');
+          } else {
+            $('input[name="student-'+tempStudentId+'-score"]').closest('.submodule').find('h4').removeClass('error');
+            $('input[name="student-'+tempStudentId+'-score"]').closest('.submodule').find('.select-wrapper').removeClass('error');
+          }
+          if (tempComment.trim() === '') {
+            if (tempStudentId < tempLowestId) {
+              tempLowestId = tempStudentId;
+            }
+            $('textarea[name="student-'+tempStudentId+'-comment"]').closest('.submodule').find('h4').addClass('error');
+            $('textarea[name="student-'+tempStudentId+'-comment"]').closest('.submodule').find('textarea').addClass('error');
+          } else {
+            $('textarea[name="student-'+tempStudentId+'-comment"]').closest('.submodule').find('h4').removeClass('error');
+            $('textarea[name="student-'+tempStudentId+'-comment"]').closest('.submodule').find('textarea').removeClass('error');
+          }
+        }
+
+        if (tempLowestId < 999) {
+          var $earliestErrorDiv = $('.evaluation-module[data-student-id="'+tempLowestId+'"]');
+          $('html,body').animate({
+            scrollTop: $earliestErrorDiv.offset().top
+          }, 300);
+          return false;
+        } else {
+          $activityIndicator.removeClass('inactive');
+          return true;
+        }
+      };
+
+  // functions
+  function beforeSubmit() {
+    return EvaluationForm.beforeSubmit();
+  }
+
+  function checkToggleSubmitBtn() {
+    var studentIds  = EvaluationForm.studentIds,
+        numStudents = EvaluationForm.numStudents,
+        tempStudentId;
+
+    if ( $('input[type="radio"]:checked').length === studentIds.length ) {
+      for (var i = 0; i < numStudents; i++) {
+        tempStudentId = studentIds[i];
+        if ( $('textarea[name="student-'+tempStudentId+'-comment"]').val().trim() === '' ) {
+          $submitBtn.attr('disabled', 'disabled');
+          return;
+        }
+      }
+      $submitBtn.removeAttr('disabled');
+    } else {
+      $submitBtn.attr('disabled', 'disabled');
+    }
+  }
+
+  // jQuery
+  $().ready(function() {
+    $('input[type="radio"]').live('change', function() {
+      $(this).closest('.submodule').find('h4').removeClass('error');
+      $(this).closest('.submodule').find('.select-wrapper').removeClass('error');
+      checkToggleSubmitBtn();
+    });
+
+    $('textarea').live('keyup', function() {
+      if ($(this).val().trim() !== '') {
+        $(this).closest('.submodule').find('h4').removeClass('error');
+        $(this).closest('.submodule').find('textarea').removeClass('error');
+      }
+      checkToggleSubmitBtn();
+    });
+  });
+
+</script>

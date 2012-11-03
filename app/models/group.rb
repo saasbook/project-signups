@@ -1,5 +1,6 @@
 class Group < ActiveRecord::Base
   has_many :students
+  has_many :team_evaluations
 
   # This makes no sense
   # FIXME: In the future, completely rewrite it because it makes no sense
@@ -22,4 +23,18 @@ class Group < ActiveRecord::Base
   def select_name
     "#{id}) #{students.map{|x| "#{x.first_name} #{x.last_name[0]}."}.join(", ")}"
   end
+
+  def self.get_group_select_options
+    groups = Group.all
+    group_select_options = groups.map(&:id).zip(groups.map(&:id)).unshift([])
+    return group_select_options
+  end
+
+  def get_all_students_select_options
+    return nil if self.nil?
+    all_students = self.students.find(:all, :select => "id, first_name, last_name, nick_name")
+    all_students_select_options = all_students.map(&:full_name).zip(all_students.map(&:id)).unshift([])
+    return all_students_select_options
+  end
+
 end

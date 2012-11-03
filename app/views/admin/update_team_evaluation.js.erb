@@ -1,0 +1,6 @@
+<% if @success %>
+  $('.evaluation-entry[data-team-evaluation-id="<%= @team_evaluation.id %>"]').find('.score-value-wrapper').removeClass('inactive');
+  $('.evaluation-entry[data-team-evaluation-id="<%= @team_evaluation.id %>"]').find('.edit-score-input-wrapper').addClass('inactive');
+  $('.evaluation-entry[data-team-evaluation-id="<%= @team_evaluation.id %>"]').find('.score').text('<%= @score %>');
+<% end %>
+showFlashMessage('<%= escape_javascript(@message) %>', '<%= @success == true ? "notice" : "error" %>');

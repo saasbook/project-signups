@@ -1,3 +1,123 @@
 // Place all the styles related to the Admin controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.container.admin {
+  text-shadow: 1px 1px 0 #fff;
+	h1 {
+		margin: 0;
+    padding: 20px 0;
+	}
+
+  h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+	
+	.field {
+		.label {
+      display: inline-block;
+			width: 210px;
+		}
+	}
+
+  .panel {
+    padding: 25px 0;
+    border-bottom: 1px solid #ccc;
+    -webkit-box-shadow: 0 1px 0 #fff;
+    -moz-box-shadow: 0 1px 0 #fff;
+    box-shadow: 0 1px 0 #fff;
+    &.team-evaluations-container {
+      .filters-container {
+        margin: 10px 25px;
+        display: inline-block;
+        .filters-label {
+          display: inline-block;
+          margin-right: 10px;
+        }
+        .filters-wrapper {
+          display: inline-block;
+          padding: 5px;
+          border: 1px solid #D9D9D9;
+          background: #fff;
+          -webkit-box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+          -moz-box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+          box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+          -moz-border-radius: 7px;
+          -webkit-border-radius: 7px;
+          border-radius: 7px;
+        }
+      }
+    }
+  }
+	
+	.actions {
+    margin: 0;
+    input {
+      margin: 0;
+    }
+	}
+
+  table {
+    border-spacing: 0;
+    border-collapse: collapse;
+
+    thead {
+      font-weight: bold;
+    }
+    td {
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+      box-shadow: 0 2px 0 #fff;
+      white-space: nowrap;
+      &.divider {
+        padding: 0;
+        height: 5px;
+        background: #f2f6f8; /* Old browsers */
+        background: -moz-linear-gradient(top,  #f2f6f8 0%, #d8e1e7 50%, #b5c6d0 51%, #e0eff9 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f2f6f8), color-stop(50%,#d8e1e7), color-stop(51%,#b5c6d0), color-stop(100%,#e0eff9)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  #f2f6f8 0%,#d8e1e7 50%,#b5c6d0 51%,#e0eff9 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  #f2f6f8 0%,#d8e1e7 50%,#b5c6d0 51%,#e0eff9 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  #f2f6f8 0%,#d8e1e7 50%,#b5c6d0 51%,#e0eff9 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  #f2f6f8 0%,#d8e1e7 50%,#b5c6d0 51%,#e0eff9 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f6f8', endColorstr='#e0eff9',GradientType=0 ); /* IE6-9 */
+        box-shadow: 0 1px 0 #fff;
+      }
+      &.team-evaluation-score {
+        .score-value-wrapper {
+          &.inactive {
+            display: none;
+          }
+          img {
+            display: inline-block;
+            text-align: right;
+            height: 15px;
+            &.inactive {
+              display: none;
+            }
+          }
+        }
+        .edit-score-input-wrapper {
+          .edit-score-input {
+            width: 30px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+            padding: 5px;
+          }
+          &.inactive {
+            display: none;
+          }
+        }
+      }
+    }
+    tr {
+      &.evaluation-entry {
+        &:hover {
+          background: rgba(255, 255, 255, 0.8);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

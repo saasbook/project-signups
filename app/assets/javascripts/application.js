@@ -7,3 +7,27 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+var hideFlashTimeout;
+
+function showFlashMessage(message, type) {
+  if (type == 'notice') {
+    $('.flash-messages .notice').text(message).show();
+    $('.flash-messages .error').text('').hide();
+  } else if (type == 'error') {
+    $('.flash-messages .error').text(message).show();
+    $('.flash-messages .notice').text('').hide();
+  }
+  $('.flash-messages').slideDown();
+  clearTimeout(hideFlashTimeout);
+  hideFlashTimeout = setTimeout(function() {
+    $('.flash-messages').slideUp();
+  }, 5000);
+}
+
+
+$('.flash-messages').live('click', function(e) {
+  clearTimeout(hideFlashTimeout);
+  $(this).slideUp();
+});
+

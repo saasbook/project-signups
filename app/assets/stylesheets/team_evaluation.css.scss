@@ -1,0 +1,164 @@
+// Place all the styles related to the TeamEvaluation controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.container.team-evaluations {
+  text-shadow: 1px 1px 0 #fff;
+
+	.heading {
+		text-align: center;
+		padding: 25px 0;
+	}
+
+
+  .select-container {
+    padding: 10px 0;
+
+    .select-wrapper {
+      display: inline-block;
+      vertical-align: text-middle;
+      padding: 3px;
+      border: 1px solid #D9D9D9;
+      background: #fff;
+      -webkit-box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+      -moz-box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+      box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+      -moz-border-radius: 7px;
+      -webkit-border-radius: 7px;
+      border-radius: 7px;
+    }
+
+    .select-label {
+      display: inline-block;
+      vertical-align: text-middle;
+      font-size: 13px;
+      font-weight: bold;
+      width: 100px;
+    }
+
+    .notice {
+      display: inline-block;
+      vertical-align: text-middle;
+    }
+  }
+
+  .grader-select-form-container {
+    padding-bottom: 20px;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    li {
+      padding: 5px;
+    }
+  }
+
+  .evaluation-form-container {
+
+    &.inactive {
+      display: none;
+    }
+
+    h4.student-name {
+      font-size: 17px;
+      border-bottom: 1px solid #ccc;
+      padding: 0 0 20px 0;
+      -webkit-box-shadow: 0 1px 0 #fff;
+      -moz-box-shadow: 0 1px 0 #fff;
+      box-shadow: 0 1px 0 #fff;
+    }
+
+    .evaluation-module-wrapper {
+      display: inline-block;
+      border: 1px solid #e6e6e6;
+      background: rgba(255, 255, 255, 0.5);
+      -webkit-box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+      -moz-box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+      box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      border-radius: 10px;
+      -moz-border-radius: 10px;
+      -webkit-border-radius: 10px;
+      margin: 20px 0;
+
+      .evaluation-module {
+        padding: 20px;
+        border-radius: 10px;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border: 1px solid #e6e6e6;
+        -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+        -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+
+	      background: #fff url('old_wall3.png');
+
+        .submodule-heading {
+          padding: 10px 0;
+          margin: 0;
+          font-size: 13px;
+          color: #555;
+          &.error {
+            color: #d00;
+          }
+        }
+
+        .scores-container {
+          .select-wrapper {
+            text-align: center;
+            width: 510px;
+            &.error {
+              border: 1px solid #d00;
+            }
+          }
+          .score-wrapper {
+            text-align: center;
+            display: inline-block;
+            padding: 15px 10px 10px 10px;
+            .score-label {
+              font-size: 11px;
+            }
+          }
+        }
+
+        .submodule {
+          padding: 10px 0;
+        }
+      }
+    }
+    .activity-indicator {
+      display: inline-block;
+      &.inactive {
+        display: none;
+      }
+    }
+
+
+  }
+
+
+  textarea {
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+    border: 1px solid #D9D9D9;
+    -webkit-box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    &.error {
+      border: 1px solid #d00;
+    }
+  }
+
+  .evaluation-success {
+    padding: 0 0 0 15px;
+    font-size: 14px;
+    color: #0a0;
+    text-shadow: 0 1px 0 #ddd;
+  }
+
+
+}

@@ -1,0 +1,11 @@
+Hey <%= @gradee.first_name %>,
+
+Here are the results of your group evaluations for <%= @iteration_name %>.
+
+<% @anonymized_evaluations.each do |evaluation| %>
+  Score: <%= evaluation[:score] %>
+  Comment: <%= evaluation[:comment] %>
+<% end %>
+
+Thanks!
+The CS169 Fall 2012 Staff

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  grader_id: 1
+  gradee_id: 1
+  score: 1
+  iteration_id: 1
+  comment: MyString
+
+two:
+  grader_id: 1
+  gradee_id: 1
+  score: 1
+  iteration_id: 1
+  comment: MyString

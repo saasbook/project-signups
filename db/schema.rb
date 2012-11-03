@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120911031058) do
+ActiveRecord::Schema.define(:version => 20121103070343) do
 
   create_table "admin_settings", :force => true do |t|
     t.integer  "max_project_preferences"
@@ -41,6 +41,13 @@ ActiveRecord::Schema.define(:version => 20120911031058) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "assigned_project_id"
+  end
+
+  create_table "iterations", :force => true do |t|
+    t.string   "name"
+    t.datetime "due_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "project_preferences", :force => true do |t|
@@ -74,6 +81,17 @@ ActiveRecord::Schema.define(:version => 20120911031058) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "email"
+  end
+
+  create_table "team_evaluations", :force => true do |t|
+    t.integer  "grader_id"
+    t.integer  "gradee_id"
+    t.integer  "score"
+    t.integer  "iteration_id"
+    t.string   "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "group_id"
   end
 
 end

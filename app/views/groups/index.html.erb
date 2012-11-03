@@ -1,38 +1,40 @@
-<h1>Listing groups</h1>
+<div class="container groups">
+  <h1>Listing groups</h1>
 
-<table id="groups">
-  <thead>
+  <table id="groups">
+    <thead>
+      <tr>
+        <th>Number</th>
+        <th>Members</th>
+        <% if admin_signed_in? %>
+          <th></th>
+          <th></th>
+          <th></th>
+        <% end %>
+      </tr>
+    </thead>
+
+  <% @groups.each do |group| %>
     <tr>
-      <th>Number</th>
-      <th>Members</th>
+      <td><%= link_to group.id, group %></td>
+      <td><%= group.student_names.join(", ") %></td>
       <% if admin_signed_in? %>
-        <th></th>
-        <th></th>
-        <th></th>
+        <td><%= link_to 'Show', group %></td>
+        <td><%= link_to 'Edit', edit_group_path(group) %></td>
+        <td><%= link_to 'Destroy', group, confirm: 'Are you sure?', method: :delete %></td>
       <% end %>
     </tr>
-  </thead>
-
-<% @groups.each do |group| %>
-  <tr>
-    <td><%= link_to group.id, group %></td>
-    <td><%= group.student_names.join(", ") %></td>
     <% if admin_signed_in? %>
-      <td><%= link_to 'Show', group %></td>
-      <td><%= link_to 'Edit', edit_group_path(group) %></td>
-      <td><%= link_to 'Destroy', group, confirm: 'Are you sure?', method: :delete %></td>
+      <tr>
+        <td colspan="5"><%= group.students.map{|s|s.email}.join(", ") %></td>
+      </tr>
     <% end %>
-  </tr>
-  <% if admin_signed_in? %>
-    <tr>
-      <td colspan="5"><%= group.students.map{|s|s.email}.join(", ") %></td>
-    </tr>
   <% end %>
-<% end %>
-</table>
+  </table>
 
-<br />
+  <br />
 
-<% if admin_signed_in? %>
-  <%= link_to 'New Group', new_group_path %>
-<% end %>
+  <% if admin_signed_in? %>
+    <%= link_to 'New Group', new_group_path %>
+  <% end %>
+</div>

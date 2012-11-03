@@ -1,0 +1,9 @@
+$('.select-container').slideUp();
+$('.evaluation-form-container').fadeOut(400, function() {
+  $(this).remove();
+  $('.container.team-evaluations').append('<%= escape_javascript(render :partial => "form_success") %>').hide().fadeIn();
+});
+
+setTimeout(function() {
+  document.location.href = '/';
+}, 5000);

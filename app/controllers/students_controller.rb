@@ -4,7 +4,17 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    @students = Student.all
+    @students = Student.find(:all, :include => [:received_team_evaluations, :group], :order => "group_id asc")
+    @iterations = Iteration.find(:all, :order => "due_date asc")
+
+    # group all evaluations by gradee first...
+    @evaluations_for_gradee_hash = TeamEvaluation.find(:all, :include => [:grader]).group_by {|evaluation| evaluation.gradee_id}
+    @evaluations_for_gradee_hash.each_pair do |gradee_id, evaluations_arr|
+      # ... then group by iteration id
+      gradee_evaluations_for_iteration_hash = evaluations_arr.group_by { |evaluation| evaluation.iteration_id }
+      @evaluations_for_gradee_hash[gradee_id] = gradee_evaluations_for_iteration_hash
+    end
+    @students_for_group_hash = @students.group_by { |student| student.group_id }
 
     respond_to do |format|
       format.html # index.html.erb

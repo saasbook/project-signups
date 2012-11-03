@@ -1,0 +1,6 @@
+<% if @grader_selected %>
+  $('.evaluation-form-container').html('<%= escape_javascript(render :partial => "evaluation_form") %>').removeClass('inactive').fadeIn();
+<% else %>
+  $('.grader-select-form-container').html('<%= escape_javascript(render :partial => "grader_select_form") %>');
+  $('.evaluation-form-container').empty().addClass('inactive');
+<% end %>
