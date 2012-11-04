@@ -4,15 +4,15 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>Hey <%= @gradee.first_name %>,</h1>
+    <p>Hey <%= @gradee.first_name %>,</p>
     <p>
       Here are the results of your group evaluations for <%= @iteration_name %>.
     </p>
     <% @anonymized_evaluations.each do |evaluation| %>
-      <div>
+      <p>
         <span>Score: <%= evaluation[:score] %></span><br/>
         <span>Comment: <%= evaluation[:comment] %></span>
-      </div>
+      </p>
     <% end %>
     <p>Thanks!<br/>
       The CS169 Fall 2012 Staff
