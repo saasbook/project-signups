@@ -100,7 +100,7 @@ class TeamEvaluation < ActiveRecord::Base
           anonymized_evaluations.push( { :score => evaluation.score, :comment => evaluation.comment } )
           gradee = evaluation.gradee if gradee.nil?
         end
-        # TeamEvaluationMailer.team_evaluation_feedback(gradee, anonymized_evaluations, iteration).deliver
+        TeamEvaluationMailer.team_evaluation_feedback(gradee, anonymized_evaluations, iteration).deliver
       end
     end
   end
