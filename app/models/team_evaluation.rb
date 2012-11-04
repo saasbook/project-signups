@@ -130,7 +130,7 @@ class TeamEvaluation < ActiveRecord::Base
       # find a way to make this call work on both environments
       team_evaluations = self.find(:all, :conditions => conditions, :order => "created_at desc", :group => group_by_clause, :include => include_assocs)
     else
-      team_evaluations = self.select("distinct on (#{distinct_clause}) grader_id, gradee_id, iteration_id, id, created_at, group_id, score, comment").where(conditions).order(order_by_clause).includes(include_assocs)
+      team_evaluations = self.select("distinct on (#{distinct_clause}) grader_id, gradee_id, iteration_id, id, created_at, group_id, score, comment, delivered").where(conditions).order(order_by_clause).includes(include_assocs)
     end
 
     return team_evaluations
