@@ -8,7 +8,7 @@ ProjectSignups::Application.initialize!
 ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = {
   :user_name => "tkoc8qtb",
-  :password => "app8956819@heroku.com"
+  :password => "app8956819@heroku.com",
   :domain => "heroku.com"
   :address => "smtp.sendgrid.net",
   :port => 587,
