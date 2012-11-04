@@ -78,7 +78,7 @@ class TeamEvaluation < ActiveRecord::Base
     # returns all group evaluations for each group and its group members evaluations of each other
     # can access hash of evaluations by group id
     # can further access each gradee's evaluation by gradee_id
-    team_evaluations = self.select("distinct on (grader_id, gradee_id) grader_id, gradee_id, id, created_at, group_id, score").where("iteration_id = #{iteration_id}").order("grader_id desc, gradee_id desc, created_at desc").includes([:gradee])
+    team_evaluations = self.select("distinct on (grader_id, gradee_id) grader_id, gradee_id, id, created_at, group_id, score, comment").where("iteration_id = #{iteration_id}").order("grader_id desc, gradee_id desc, created_at desc").includes([:gradee])
 
     iteration = Iteration.find_by_id(iteration_id)
     team_evaluations_for_group = team_evaluations.group_by { |evaluation| evaluation.group_id}
