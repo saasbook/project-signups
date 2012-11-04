@@ -17,7 +17,7 @@ class StudentsController < ApplicationController
     @students_for_group_hash = @students.group_by { |student| student.group_id }
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :layout => "students" } # index.html.erb
       format.json { render json: @students }
     end
   end

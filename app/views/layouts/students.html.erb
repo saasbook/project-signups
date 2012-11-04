@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ProjectSignups</title>
+	<%= stylesheet_link_tag    "application" %>
+	<%= javascript_include_tag "application" %>
+	<%= csrf_meta_tags %>
+</head>
+
+<body>
+
+	<div class="nav-bar-container">
+		<div class="nav-bar">
+		<%= link_to "CS169 Project Website", root_path, :class => "heading home" %>
+		
+			<% if admin_signed_in? %>
+			<ul class="admin-controls">
+				<li><%= link_to "Settings", admin_path %></li>
+				<li><%= link_to "Logout", sign_out_path %></li>
+			</ul>
+			<% end %>
+		</div>
+	</div>
+	
+	<div class="wrapper">
+		<div class="flash-messages">
+			<p class="notice"></p>
+			<p class="error"></p>
+	    </div>
+	
+		<div class="content-student">
+	  	<%= yield %>
+		</div>
+	</div>
+
+
+	<script type="text/javascript">
+    <% if flash[:notice].present? %>
+      showFlashMessage('<%= escape_javascript(flash[:notice]) %>', 'notice');
+    <% elsif flash[:error].present? %>
+      showFlashMessage('<%= escape_javascript(flash[:error]) %>', 'error');
+    <% end %>
+	</script>
+</body>
+
+</html>

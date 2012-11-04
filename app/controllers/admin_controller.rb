@@ -42,4 +42,16 @@ class AdminController < ApplicationController
     end
   end
 
+  def email_team_evaluations
+    @iteration = Iteration.find_by_id(params[:iteration_id])
+    if @iteration.present?
+      TeamEvaluation.send_all_team_evaluations(@iteration.id)
+      @success = true
+      @message = "Sending all team evaluations for #{@iteration.name}"
+    else
+      @success = false
+      @message = "Cannot send team evaluations for nonexistent iteration"
+    end
+  end
+
 end

@@ -32,6 +32,7 @@ ProjectSignups::Application.routes.draw do
   match 'admin' => 'admin#index', :as => :admin
   match 'admin/update_settings' => 'admin#update', :as => :admin_update_settings
   match 'admin/update_team_evaluation_path' => 'admin#update_team_evaluation', :as => :admin_update_team_evaluation
+  match 'admin/email_team_evaluations' => 'admin#email_team_evaluations', :as => :admin_email_team_evaluations
   
   root :to => "home#index"
 

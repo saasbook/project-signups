@@ -7,7 +7,6 @@
   font-size: 12px;
   h1 {
     padding: 15px;
-    margin: 0;
   }
 
   table {
@@ -52,15 +51,11 @@
         background: rgba(255, 255, 255, 1);
       }
       th {
-        vertical-align: bottom;
         padding: 10px;
         text-align: left;
-        border-bottom: 1px solid #ccc;
         .email-evaluations-btn {
           margin: 5px 0 0 0;
-          font-size: 11px;
-          font-weight: normal;
-          display: block;
+          font-size: 12px;
         }
 
       }

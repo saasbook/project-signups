@@ -8,7 +8,10 @@
       <th>Account Name</th>
       <th>Group</th>
       <% @iterations.each do |iteration| %>
-        <th>Evaluations Received From <%= iteration.name %></th>
+        <th>
+          <div class="received-evaluations-heading">Evaluations Received From <%= iteration.name %></div>
+          <%= link_to "Email All Evaluations", "#", :class => "btn email-evaluations-btn", :"data-iteration-id" => iteration.id, :"data-iteration-name" => iteration.name %>
+        </th>
       <% end %>
       <th></th>
       <th></th>
@@ -39,3 +42,24 @@
 
   <%= link_to 'New Student', new_student_path %>
 </div>
+
+<script type="text/javascript">
+  $().ready(function() {
+    $('.email-evaluations-btn').live('click', function(e) {
+      var iterationId     = $(this).attr('data-iteration-id'),
+          iterationName   = $(this).attr('data-iteration-name'),
+          confirmStr      = 'You are about to send all evaluations for ' + iterationName + '. Are you sure?',
+          confirmVal      = confirm(confirmStr);
+
+      console.log(confirmVal);
+      if (confirmVal) {
+        $.ajax({
+          url: '<%= admin_email_team_evaluations_path() %>',
+          data: { 'iteration_id': iterationId }
+        });
+      }
+      e.preventDefault();
+    });
+  });
+
+</script>
