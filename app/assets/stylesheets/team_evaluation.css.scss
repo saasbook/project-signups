@@ -160,5 +160,11 @@
     text-shadow: 0 1px 0 #ddd;
   }
 
+  .preload-img {
+	  background: #fff url('old_wall3.png');
+    width: 1px;
+    height: 1px;
+    display: none;
+  }
 
 }

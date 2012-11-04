@@ -39,10 +39,13 @@
         .title {
           font-weight: bold;
         }
-        .pending {
-          color: #e90;
+        .none {
+          color: #d00;
         }
-        .received {
+        .created {
+          color: rgba(240, 200, 44, 1);
+        }
+        .delivered {
           color: #0c0;
         }
       }
@@ -56,11 +59,22 @@
         padding: 10px;
         text-align: left;
         border-bottom: 1px solid #ccc;
-        .email-evaluations-btn {
-          margin: 5px 0 0 0;
-          font-size: 11px;
-          font-weight: normal;
-          display: block;
+        .email-evaluations-wrapper {
+          text-align: center;
+          img.activity-indicator {
+            display: inline-block;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.5);
+            &.inactive {
+              display: none;
+            }
+          }
+          .email-evaluations-btn {
+            margin: 5px 0 0 0;
+            font-size: 11px;
+            font-weight: normal;
+            display: block;
+          }
         }
 
       }

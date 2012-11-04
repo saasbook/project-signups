@@ -6,15 +6,12 @@ class StudentsController < ApplicationController
   def index
     @students = Student.find(:all, :include => [:received_team_evaluations, :group], :order => "group_id asc")
     @iterations = Iteration.find(:all, :order => "due_date asc")
-
-    # group all evaluations by gradee first...
-    @evaluations_for_gradee_hash = TeamEvaluation.find(:all, :include => [:grader]).group_by {|evaluation| evaluation.gradee_id}
-    @evaluations_for_gradee_hash.each_pair do |gradee_id, evaluations_arr|
-      # ... then group by iteration id
-      gradee_evaluations_for_iteration_hash = evaluations_arr.group_by { |evaluation| evaluation.iteration_id }
-      @evaluations_for_gradee_hash[gradee_id] = gradee_evaluations_for_iteration_hash
-    end
     @students_for_group_hash = @students.group_by { |student| student.group_id }
+
+    team_evaluations = TeamEvaluation.get_recent_evaluations([:grader])
+
+    @evaluations_for_gradee_hash = TeamEvaluation.get_evaluations_for_gradee_hash(team_evaluations)
+    @all_evaluations_delivered_for_group_hash = TeamEvaluation.get_evaluations_delivered_for_group_hash(team_evaluations, @students_for_group_hash)
 
     respond_to do |format|
       format.html { render :layout => "students" } # index.html.erb

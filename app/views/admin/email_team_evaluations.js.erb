@@ -1,1 +1,11 @@
 showFlashMessage('<%= escape_javascript(@message) %>', '<%= @success == true ? "notice" : "error" %>');
+
+<% if @group.present? %>
+  $('.received-evaluations[data-iteration-id-group-id="<%= "#{@iteration.id},#{@group.id}" %>"]').find('.email-group-evaluations-btn').hide();
+  $('.received-evaluations[data-iteration-id-group-id="<%= "#{@iteration.id},#{@group.id}" %>"]').find('.created').find('.status').text('delivered');
+  $('.received-evaluations[data-iteration-id-group-id="<%= "#{@iteration.id},#{@group.id}" %>"]').find('.created').removeClass('created').addClass('delivered');
+<% else %>
+  $('.received-evaluations[data-iteration-id="<%= @iteration.id %>"]').find('.created').find('.status').text('delivered');
+  $('.received-evaluations[data-iteration-id="<%= @iteration.id %>"]').find('.created').removeClass('created').addClass('delivered');
+<% end %>
+

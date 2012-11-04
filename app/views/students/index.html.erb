@@ -10,7 +10,9 @@
       <% @iterations.each do |iteration| %>
         <th>
           <div class="received-evaluations-heading">Evaluations Received From <%= iteration.name %></div>
-          <%= link_to "Email All Evaluations", "#", :class => "btn email-evaluations-btn", :"data-iteration-id" => iteration.id, :"data-iteration-name" => iteration.name %>
+          <div class="email-evaluations-wrapper">
+            <%= link_to "Email All Evaluations", "#", :class => "btn email-evaluations-btn", :"data-iteration-id" => iteration.id, :"data-iteration-name" => iteration.name, :disabled => (iteration.emails_delivered == true ? true : false) %>
+          </div>
         </th>
       <% end %>
       <th></th>
@@ -26,9 +28,9 @@
       <td><%= link_to student.group_id, group_path(student.group_id) %></td>
 
       <% @iterations.each do |iteration| %>
-      <td class="received-evaluations">
-        <%= show_received_evaluations(@evaluations_for_gradee_hash, @students_for_group_hash, student, iteration) %>
-      </td>
+        <td class="received-evaluations" data-iteration-id="<%= iteration.id %>" data-iteration-id-group-id="<%= iteration.id %>,<%= student.group_id %>">
+          <%= show_received_evaluations(@evaluations_for_gradee_hash, @students_for_group_hash, @all_evaluations_delivered_for_group_hash[student.group_id], student, iteration) %>
+        </td>
       <% end %>
 
       <td><%= link_to 'Show', student %></td>
@@ -51,13 +53,32 @@
           confirmStr      = 'You are about to send all evaluations for ' + iterationName + '. Are you sure?',
           confirmVal      = confirm(confirmStr);
 
-      console.log(confirmVal);
       if (confirmVal) {
+        $(this).attr('disabled', 'disabled');
         $.ajax({
           url: '<%= admin_email_team_evaluations_path() %>',
           data: { 'iteration_id': iterationId }
         });
       }
+      e.preventDefault();
+    });
+
+    $('.email-group-evaluations-btn').live('click', function(e) {
+      var iterationId     = $(this).attr('data-iteration-id'),
+          iterationName   = $(this).attr('data-iteration-name'),
+          groupId         = $(this).attr('data-group-id'),
+          confirmStr      = 'You are about to resend this group all of its evaluations for ' + iterationName + '. Are you sure?',
+          confirmVal      = confirm(confirmStr),
+          $redeliveryBtns = $('.received-evaluations[data-iteration-id-group-id="'+iterationId+','+groupId+'"]').find('.email-group-evaluations-btn');
+
+      if (confirmVal) {
+        $redeliveryBtns.attr('disabled', 'disabled');
+        $.ajax({
+          url: '<%= admin_email_team_evaluations_path() %>',
+          data: { 'iteration_id': iterationId, 'group_id': groupId }
+        });
+      }
+
       e.preventDefault();
     });
   });

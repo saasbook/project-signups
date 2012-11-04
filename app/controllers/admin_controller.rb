@@ -44,10 +44,16 @@ class AdminController < ApplicationController
 
   def email_team_evaluations
     @iteration = Iteration.find_by_id(params[:iteration_id])
+    @group = Group.find_by_id(params[:group_id])
     if @iteration.present?
-      TeamEvaluation.send_all_team_evaluations(@iteration.id)
+      if @group.blank?
+        TeamEvaluation.send_all_team_evaluations(@iteration.id)
+        @message = "Sent all team evaluations for #{@iteration.name}"
+      else
+        TeamEvaluation.send_group_team_evaluations(@iteration.id, @group.id)
+        @message = "Sent group #{@group.id} evaluations for #{@iteration.name}"
+      end
       @success = true
-      @message = "Sending all team evaluations for #{@iteration.name}"
     else
       @success = false
       @message = "Cannot send team evaluations for nonexistent iteration"
