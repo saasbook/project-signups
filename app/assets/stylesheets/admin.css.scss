@@ -3,6 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .container.admin {
+  position: relative;
+
   text-shadow: 1px 1px 0 #fff;
 	h1 {
 		margin: 0;
@@ -33,6 +35,38 @@
     -moz-box-shadow: 0 1px 0 #fff;
     box-shadow: 0 1px 0 #fff;
     &.team-evaluations-container {
+      .heatmap-container {
+        display: inline-block;
+        &.inactive {
+          display: none;
+        }
+        .heatmap-wrapper {
+          margin-left: 50px;
+          padding: 10px;
+          .heatmap-label {
+            display: inline-block;
+          }
+          .heatmap-toggle {
+            margin-left: 10px;
+          }
+          &.fixed {
+            padding: 9px;
+            -webkit-box-shadow: 2px 2px 2px #ccc;
+            -moz-box-shadow: 2px 2px 2px #ccc;
+            box-shadow: 2px 2px 2px #ccc;
+            -webkit-border-bottom-right-radius: 10px;
+            -webkit-border-bottom-left-radius: 10px;
+            -moz-border-radius-bottomright: 10px;
+            -moz-border-radius-bottomleft: 10px;
+            border-bottom-right-radius: 10px;
+            border-bottom-left-radius: 10px;
+            border: 1px solid #ccc;
+            position: fixed;
+            background: rgba(255, 255, 255, 0.8);
+            top: 0;
+          }
+        }
+      }
       .filters-container {
         margin: 10px 25px;
         display: inline-block;
@@ -166,7 +200,7 @@
       &.gradee-label {
         font-weight: bold;
         color: #333;
-        background: #feffff; /* Old browsers */
+        background: #fdffff; /* Old browsers */
       }
       .no-evaluation {
         color: #d00;

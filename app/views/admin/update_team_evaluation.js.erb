@@ -2,5 +2,9 @@
   $('.evaluation[data-evaluation-id="<%= @evaluation.id %>"]').find('.score-wrapper').removeClass('inactive');
   $('.evaluation[data-evaluation-id="<%= @evaluation.id %>"]').find('.edit-score-wrapper').addClass('inactive');
   $('.evaluation[data-evaluation-id="<%= @evaluation.id %>"]').find('.score-value').text('<%= @score %>');
+  if ($('.heatmap-toggle').attr('data-status') === 'on') {
+    toggleHeatmap($('.evaluation[data-evaluation-id!="0"]'), 'on');
+  }
+
 <% end %>
 showFlashMessage('<%= escape_javascript(@message) %>', '<%= @success == true ? "notice" : "error" %>');

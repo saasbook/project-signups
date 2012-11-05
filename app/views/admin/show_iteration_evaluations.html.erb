@@ -10,6 +10,15 @@
         <%= select_tag :"iteration-id", options_for_select(@iteration_select_options) %>
       </div>
     </div>
+    <div class="heatmap-container inactive">
+      <div class="heatmap-wrapper">
+        <div class="heatmap-label">
+          Heatmap
+        </div>
+        <%= link_to "Show", "#", :class => "heatmap-toggle btn", :"data-status" => "off" %>
+      </div>
+    </div>
+
 
     <section class="team-evaluations-wrapper"></section>
   </div>
@@ -70,6 +79,48 @@
       }
     });
 
+    $('.heatmap-toggle').live('click', function(e) {
+      var $evaluations  = $('.evaluation[data-evaluation-id!="0"]'),
+          currentStatus = $(this).attr('data-status'),
+          newStatus     = currentStatus === 'on' ? 'off' : 'on',
+          newText       = newStatus === 'on' ? 'Hide' : 'Show';
+
+      toggleHeatmap($evaluations, newStatus);
+      $(this).attr('data-status', newStatus);
+      $(this).text(newText);
+      e.preventDefault();
+    });
+
+    $(window).scroll(function() {
+      var currentOffsetTop = $(window).scrollTop();
+      console.log(currentOffsetTop);
+      if (currentOffsetTop > 150) {
+        $('.heatmap-wrapper').addClass('fixed');
+      } else {
+        $('.heatmap-wrapper').removeClass('fixed');
+      }
+    });
+
   });
+
+  function toggleHeatmap($evaluations, toggleStatus) {
+    var tempScore,
+        greenPct,
+        redPct;
+    if (toggleStatus === 'on') {
+      // turn heatmap vis on
+      $.each($evaluations, function(index, item) {
+        tempScore = parseInt($(item).find('.score-value').text());
+        console.log(tempScore);
+        greenPct  = parseInt(255/10*tempScore);
+        redPct    = parseInt(255 - 255/10*tempScore);
+
+        $(item).css('background', 'rgba('+redPct+', '+greenPct+', 0, 0.1)');
+      });
+    } else if (toggleStatus === 'off') {
+      // turn heatmap vis off
+      $evaluations.css('background', 'rgba(255, 255, 255, 0.5)');
+    }
+  }
 
 </script>

@@ -1,1 +1,3 @@
 $('section.team-evaluations-wrapper').html('<%= escape_javascript(render :partial => "team_evaluations_table") %>');
+$('.heatmap-container').removeClass('inactive');
+toggleHeatmap($('.evaluation[data-evaluation-id!="0"]'), $('.heatmap-toggle').attr('data-status'));
