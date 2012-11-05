@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121104083352) do
+ActiveRecord::Schema.define(:version => 20121105231852) do
 
   create_table "admin_settings", :force => true do |t|
     t.integer  "max_project_preferences"
@@ -89,11 +89,11 @@ ActiveRecord::Schema.define(:version => 20121104083352) do
     t.integer  "gradee_id"
     t.integer  "score"
     t.integer  "iteration_id"
-    t.string   "comment"
+    t.text     "comment",      :limit => 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "group_id"
-    t.boolean  "delivered",    :default => false
+    t.boolean  "delivered",                   :default => false
   end
 
 end
