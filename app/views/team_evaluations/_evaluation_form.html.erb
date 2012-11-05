@@ -138,7 +138,6 @@
       range: "min",
       value: 5,
       slide: function( event, ui ) {
-        console.log(ui);
         var score       = ui.value,
             rgbaString  = Colors.scoreToRgba(score, 0, 10, 1);
         $(this).closest('.submodule').find('.score-label').text(score);
