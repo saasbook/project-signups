@@ -54,6 +54,10 @@ module TeamEvaluationHelper
     lowest_student_id = student_ids.min
     highest_student_id = student_ids.max
 
+    s += %{ <section class="group-evaluations-wrapper">
+              <div class="axis grader-axis">Evaluators</div>
+              <div class="axis gradee-axis">Recipients</div>}
+
     s += %{<table class="group-#{group_id}-evaluations">}
     (lowest_student_id-1..highest_student_id).each do |gradee_id|
       s += %{<tr>}
@@ -63,8 +67,7 @@ module TeamEvaluationHelper
           if !student_ids.include?(grader_id)
             # first col
             s += %{<td class="definition">
-                      <div class="recipient-label">Recipient</div>
-                      <div class="evaluator-label">Grader</div>
+                      <h2 class="group-label">Group #{group_id}</h2>
                   </td>}
           else
             s += %{<td class="grader-label">#{student_for_id_hash[grader_id].full_name}</td>}
@@ -102,6 +105,7 @@ module TeamEvaluationHelper
       end
     end
     s += %{</table>}
+    s += %{</section>}
     return s.html_safe
   end
 end
