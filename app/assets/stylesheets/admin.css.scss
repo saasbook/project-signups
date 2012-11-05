@@ -41,19 +41,20 @@
           display: none;
         }
         .heatmap-wrapper {
-          margin-left: 50px;
-          padding: 10px;
+          margin-left: 410px;
+          padding: 10px 20px;
           .heatmap-label {
             display: inline-block;
           }
           .heatmap-toggle {
             margin-left: 10px;
+            width: 60px;
           }
           &.fixed {
-            padding: 9px;
-            -webkit-box-shadow: 2px 2px 2px #ccc;
-            -moz-box-shadow: 2px 2px 2px #ccc;
-            box-shadow: 2px 2px 2px #ccc;
+            padding: 10px 19px;
+            -webkit-box-shadow: 1px 1px 5px #999;
+            -moz-box-shadow: 1px 1px 5px #999;
+            box-shadow: 1px 1px 5px #999;
             -webkit-border-bottom-right-radius: 10px;
             -webkit-border-bottom-left-radius: 10px;
             -moz-border-radius-bottomright: 10px;
@@ -61,8 +62,9 @@
             border-bottom-right-radius: 10px;
             border-bottom-left-radius: 10px;
             border: 1px solid #ccc;
+            border-top: 0;
             position: fixed;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.9);
             top: 0;
           }
         }
