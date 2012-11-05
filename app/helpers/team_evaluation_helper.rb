@@ -6,10 +6,10 @@ module TeamEvaluationHelper
       group_size = students_for_group_hash[student.group_id].size
       grader_ids = evaluations_for_gradee_hash[student.id][iteration.id].map(&:grader_id)
 
-      s = %{<div class="title">#{unique_evaluations_received}/#{group_size - 1} evaluations received</div>}
+      s = %{<div class="title">#{unique_evaluations_received}/#{group_size} evaluations received</div>}
 
       statuses = []
-      (students_for_group_hash[student.group_id] - [student]).each do |temp_student|
+      students_for_group_hash[student.group_id].each do |temp_student|
         if !grader_ids.include?(temp_student.id)
           status = "none"
           statuses.push(status)
@@ -43,6 +43,65 @@ module TeamEvaluationHelper
       s = %{<div class="title">0 evaluations received</div>}
     end
 
+    return s.html_safe
+  end
+
+  def team_evaluation_table(group_id, indexed_evaluations, students)
+    s = %{}
+    indices = indexed_evaluations.keys
+    student_ids = students.map(&:id)
+    student_for_id_hash = students.index_by {|student| student.id}
+    lowest_student_id = student_ids.min
+    highest_student_id = student_ids.max
+
+    s += %{<table class="group-#{group_id}-evaluations">}
+    (lowest_student_id-1..highest_student_id).each do |gradee_id|
+      s += %{<tr>}
+      (lowest_student_id-1..highest_student_id).each do |grader_id|
+        if !student_ids.include?(gradee_id)
+          # first row, output grader name from grader_id
+          if !student_ids.include?(grader_id)
+            # first col
+            s += %{<td class="definition">
+                      <div class="recipient-label">Recipient</div>
+                      <div class="evaluator-label">Grader</div>
+                  </td>}
+          else
+            s += %{<td class="grader-label">#{student_for_id_hash[grader_id].full_name}</td>}
+          end
+        else
+          if !student_ids.include?(grader_id)
+            # first column, output gradee name
+            s += %{<td class="gradee-label">#{student_for_id_hash[gradee_id].full_name}</td>}
+          else
+            evaluation = indexed_evaluations[[gradee_id, grader_id]]
+            # it's possible no evaluation is here
+            s += %{<td class="evaluation" data-evaluation-id="#{evaluation.present? ? evaluation.id : "0"}">}
+            if evaluation.present?
+              s += %{<div class="score-container">
+                      <div class="score-wrapper">
+                        <span class="label">Score:</span> 
+                        <span class="score-value">#{evaluation.score}</span>
+                        #{image_tag "edit.png", :class => "icon-edit-score inactive" }
+                      </div>
+                      <div class="edit-score-wrapper inactive">
+                        <span class="label">Score:</span> 
+                        #{text_field_tag :"edit-evaluation-#{evaluation.id}-score-input", evaluation.score, :class => "edit-score-input"}
+                      </div>
+                    </div>
+                    <div class="comment">
+                      <span class="label">Comment:</span> 
+                      <span class="comment-text">#{evaluation.comment}</span>
+                    </div>}
+            else
+              s += %{<div class="no-evaluation">Missing</div>}
+            end
+            s += %{</td>}
+          end
+        end
+      end
+    end
+    s += %{</table>}
     return s.html_safe
   end
 end

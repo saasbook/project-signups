@@ -16,12 +16,14 @@
 		</li>
 		<% end %>
 		
-		<%= link_to new_signup_path do %>		
-		<li class="menu-item"> 
-			<div class="icon icon-signup"></div>
-			Project Signup
-		</li>
-		<% end %>
+    <% if false %>
+    <%= link_to new_signup_path do %>		
+    <li class="menu-item"> 
+      <div class="icon icon-signup"></div>
+      Project Signup
+    </li>
+    <% end %>
+    <% end %>
 		
 		<%= link_to project_assignments_path do %>
 		<li class="menu-item"> 
@@ -32,7 +34,7 @@
 
 		<%= link_to team_evaluations_path do %>
 		<li class="menu-item"> 
-			<div class="icon icon-team-evaluations"></div>
+			<div class="icon icon-signup"></div>
 			Team Evaluations
 		</li>
 		<% end %>
@@ -54,6 +56,13 @@
 		<li class="menu-item"> 
 			<div class="icon icon-project-preferences"></div>
 			Project Preferences
+		</li>
+		<% end %>
+
+		<%= link_to admin_show_iteration_evaluations_path do %> 
+		<li class="menu-item"> 
+			<div class="icon icon-signup"></div>
+      All Iteration Evaluations
 		</li>
 		<% end %>
 	</ul>

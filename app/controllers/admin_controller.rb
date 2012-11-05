@@ -2,15 +2,8 @@ class AdminController < ApplicationController
   before_filter :authenticate_admin!
 
   def index
-    if request.xhr?
-      filters = { :iteration_id => params[:iteration_id] }
-      @grouped_team_evaluations = TeamEvaluation.grouped_team_evaluations(filters)
-    else
-      @settings = AdminSetting.first || AdminSetting.new
-      @max_project_preferences = @settings.max_project_preferences || 5
-      @grouped_team_evaluations = TeamEvaluation.grouped_team_evaluations
-      @iteration_select_options = Iteration.get_iteration_select_options
-    end
+    @settings = AdminSetting.first || AdminSetting.new
+    @max_project_preferences = @settings.max_project_preferences || 5
   end
 
   def update
@@ -26,14 +19,14 @@ class AdminController < ApplicationController
   end
 
   def update_team_evaluation
-    team_evaluation_id = params[:team_evaluation_id]
-    @team_evaluation = TeamEvaluation.find_by_id(team_evaluation_id)
-    render :nothing => true and return if @team_evaluation.nil?
+    evaluation_id = params[:evaluation_id]
+    @evaluation = TeamEvaluation.find_by_id(evaluation_id)
+    render :nothing => true and return if @evaluation.nil?
 
     @score = params[:score]
 
-    @team_evaluation.score = @score
-    if @team_evaluation.save
+    @evaluation.score = @score
+    if @evaluation.save
       @message = "Evaluation score updated!"
       @success = true
     else
@@ -58,6 +51,41 @@ class AdminController < ApplicationController
       @success = false
       @message = "Cannot send team evaluations for nonexistent iteration"
     end
+  end
+
+  def show_iteration_evaluations
+    if request.xhr?
+      iteration_id = params[:iteration_id]
+      @iteration = Iteration.find_by_id(iteration_id)
+      render :nothing => true and return if @iteration.nil?
+
+      distinct_clause = "grader_id, gradee_id"
+      group_by_clause = [:grader_id, :gradee_id]
+      order_by_clause = "grader_id desc, gradee_id desc, created_at desc"
+      includes_clause = [:grader, :gradee, :group]
+      conditions_clause = ["iteration_id = ?", iteration_id]
+
+      if Rails.env.development?
+        # find a way to make this call work on both environments
+        @team_evaluations = TeamEvaluation.find(:all, :conditions => conditions_clause, :order => "created_at desc", :group => group_by_clause, :include => includes_clause)
+      else
+        @team_evaluations = TeamEvaluation.select("distinct on (#{distinct_clause}) grader_id, gradee_id, iteration_id, id, created_at, group_id, score, comment, delivered").where(
+          conditions_clause).order(order_by_clause).includes(includes_clause)
+      end
+
+      @team_evaluations_for_group_hash = @team_evaluations.group_by { |evaluation| evaluation.group_id }
+
+      @team_evaluations_for_group_hash.each_pair do |group_id, evaluations|
+        # index each one by recipient and grader. ezpz
+        @team_evaluations_for_group_hash[group_id] = evaluations.index_by { |evaluation| [evaluation.gradee_id, evaluation.grader_id] }
+      end
+
+      @students_for_group_hash = Student.all.group_by {|student| student.group_id}
+      logger.debug(@team_evaluations_for_group_hash)
+    else
+      @iteration_select_options = Iteration.get_iteration_select_options
+    end
+
   end
 
 end

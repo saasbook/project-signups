@@ -1,0 +1,75 @@
+<div class="container admin">
+
+  <div class="team-evaluations-container panel">
+    <h1>Team Evaluations</h1>
+    <div class="filters-container">
+      <div class="filters-label">
+        Choose Iteration
+      </div>
+      <div class="filters-wrapper">
+        <%= select_tag :"iteration-id", options_for_select(@iteration_select_options) %>
+      </div>
+    </div>
+
+    <section class="team-evaluations-wrapper"></section>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $().ready(function() {
+    $('#iteration-id').live('change', function() {
+      var iterationId = $(this).val();
+      $.ajax({
+        url: '<%= admin_show_iteration_evaluations_path() %>',
+        data: { 'iteration_id': iterationId },
+        beforeSend: function(xhr, settings) {
+          xhr.setRequestHeader('accept', '*/*;q=0.5, ' + settings.accepts.script);
+        }
+      });
+    });
+
+    $('td').live('hover', function(e) {
+      $('.icon-edit-score').addClass('inactive');
+      if ($(this).hasClass('evaluation')) {
+        $(this).find('.icon-edit-score').removeClass('inactive');
+      }
+    });
+
+    $('td').live('click', function(e) {
+      var $target = $(e.target),
+          $scoreContainer;
+      if ( $target.hasClass('icon-edit-score') ) {
+        $scoreContainer = $target.closest('.score-container');
+        // show edit form for this score
+        $scoreContainer.find('.edit-score-wrapper').removeClass('inactive');
+        $scoreContainer.find('.score-wrapper').addClass('inactive');
+      }
+      e.preventDefault();
+    });
+
+    $('.edit-score-input').live('keydown', function(e) {
+      var keyCode   = e.keyCode,
+          newScore,
+          evaluationId,
+          $scoreContainer = $(this).closest('.score-container');
+
+      if (keyCode === 13) {
+        newScore = $(this).val();
+        evaluationId = $(this).closest('.evaluation').attr('data-evaluation-id');
+        $.ajax({
+          url: '<%= admin_update_team_evaluation_path() %>',
+          data: { 'evaluation_id' : evaluationId,
+                  'score'         : newScore },
+          beforeSend: function(xhr, settings) {
+            xhr.setRequestHeader('accept', '*/*;q=0.5, ' + settings.accepts.script);
+          }
+        });
+      } else if (keyCode == 27) {
+        $scoreContainer.find('.score-wrapper').removeClass('inactive');
+        $scoreContainer.find('.edit-score-wrapper').addClass('inactive');
+      }
+    });
+
+  });
+
+</script>

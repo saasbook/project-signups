@@ -43,7 +43,7 @@ class TeamEvaluationsController < ApplicationController
 
     if @grader_selected
       # render form for rest of group
-      @other_group_students = @group.students.find(:all, :conditions => ["id != ?", grader_id], :order => "id asc")
+      @other_group_students = @group.students.find(:all, :order => "id asc")
     else
       # render just grader name select options
       @grader_select_options = @group.get_all_students_select_options

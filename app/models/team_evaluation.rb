@@ -10,13 +10,7 @@ class TeamEvaluation < ActiveRecord::Base
   validates_presence_of :comment
   validates_presence_of :group_id
 
-  validate :cannot_evaluate_self
   validates :score, :inclusion => 0..10
-
-  def cannot_evaluate_self
-    errors[:base] << "You cannot evaluate yourself." if self.grader_id == self.gradee_id
-  end
-
 
   def self.validate_evaluation(group, iteration, grader)
     if group.nil?
@@ -42,9 +36,9 @@ class TeamEvaluation < ActiveRecord::Base
     grader_id = grader.id
     group_id = group.id
     iteration_id = iteration.id
-    other_student_ids = group.students.map(&:id) - [grader_id]
+    student_ids = group.students.map(&:id)
 
-    other_student_ids.each do |student_id|
+    student_ids.each do |student_id|
       # don't process or create any team eval entries if any required parameter is empty
       # or if any of scores are not within range
       return nil if params["student-#{student_id}-score"].blank? or params["student-#{student_id}-comment"].blank?
@@ -62,7 +56,7 @@ class TeamEvaluation < ActiveRecord::Base
 
     # create team eval entries
     team_evaluations = []
-    other_student_ids.each do |gradee_id|
+    student_ids.each do |gradee_id|
       score = params["student-#{gradee_id}-score"]
       comment = params["student-#{gradee_id}-comment"]
       team_evaluation = self.create({:grader_id => grader_id, :gradee_id => gradee_id, :iteration_id => iteration_id, :score => score, :comment => comment, :group_id => group_id })
