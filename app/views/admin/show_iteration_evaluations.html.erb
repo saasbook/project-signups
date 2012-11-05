@@ -100,6 +100,10 @@
       }
     });
 
+    $('.comment-text').live('click', function(e) {
+      $(this).closest('.comment').find('.comment-text').toggleClass('inactive');
+    });
+
   });
 
   function toggleHeatmap($evaluations, toggleStatus) {

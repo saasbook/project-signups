@@ -94,8 +94,12 @@ module TeamEvaluationHelper
                     </div>
                     <div class="comment">
                       <span class="label">Comment:</span> 
+              }
+                s += %{
                       <span class="comment-text">#{truncate(sanitize(evaluation.comment), :length => 50)}</span>
-                    </div>}
+                      <span class="comment-text inactive">#{sanitize(evaluation.comment)}</span>
+                }
+              s += %{</div>}
             else
               s += %{<div class="no-evaluation">Missing</div>}
             end

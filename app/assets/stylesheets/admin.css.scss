@@ -198,6 +198,9 @@
         font-style: italic;
         color: #8a8a8a;
         padding: 5px 0;
+        &.inactive {
+          display: none;
+        }
       }
       &.definition {
         -webkit-box-shadow: 0 0 0 #fff;
