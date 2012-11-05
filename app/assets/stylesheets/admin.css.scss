@@ -41,7 +41,7 @@
           display: none;
         }
         .heatmap-wrapper {
-          margin-left: 410px;
+          margin-left: 390px;
           padding: 10px 20px;
           .heatmap-label {
             display: inline-block;
@@ -165,7 +165,9 @@
         }
 
       }
-      .comment {
+      .comment-text {
+        font-style: italic;
+        color: #8a8a8a;
         padding: 5px 0;
       }
       &.definition {
@@ -205,6 +207,7 @@
         background: #fdffff; /* Old browsers */
       }
       .no-evaluation {
+        font-weight: bold;
         color: #d00;
       }
       .label {
