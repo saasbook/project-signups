@@ -94,7 +94,7 @@ module TeamEvaluationHelper
                     </div>
                     <div class="comment">
                       <span class="label">Comment:</span> 
-                      <span class="comment-text">#{evaluation.comment}</span>
+                      <span class="comment-text">#{sanitize(evaluation.comment)}</span>
                     </div>}
             else
               s += %{<div class="no-evaluation">Missing</div>}
