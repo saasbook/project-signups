@@ -9,19 +9,16 @@
         <h4 class="student-name"><%= student.full_name %></h4>
 
         <div class="scores-container select-container submodule">
-          <h4 class="submodule-heading">Score</h4>
+          <h4 class="submodule-heading">Score: <span class="score-label">5</span></h4>
 
           <div class="select-wrapper">
-          <% (0..10).each do |score| %>
-            <div class="score-wrapper">
-              <div class="score-input">
-                <%= radio_button_tag :"student-#{student.id}-score", score %>
-              </div>
-              <div class="score-label">
-                <%= score %>
-              </div>
-            </div>
-          <% end %>
+            <%= hidden_field_tag :"student-#{student.id}-score", 5, :class => "score-input" %>
+            <div class="slider"></div>
+          </div>
+          <div class="slider-labels-wrapper">
+            <span class="slider-min">0</span>
+            <span class="slider-mid">5</span>
+            <span class="slider-max">10</span>
           </div>
         </div>
 
@@ -39,6 +36,7 @@
       <%= image_tag "activity.gif" %>
     </span>
   </div>
+
 <% end %>
 
 <script type="text/javascript">
@@ -58,7 +56,7 @@
 
         for (var i = 0; i < numStudents; i++) {
           tempStudentId = studentIds[i];
-          tempScore     = $('input[name="student-'+tempStudentId+'-score"]:checked').val();
+          tempScore     = $('input[name="student-'+tempStudentId+'-score"]').val();
           tempComment   = $('textarea[name="student-'+tempStudentId+'-comment"]').val();
           if (tempScore === undefined) {
             if (tempStudentId < tempLowestId) {
@@ -104,18 +102,14 @@
         numStudents = EvaluationForm.numStudents,
         tempStudentId;
 
-    if ( $('input[type="radio"]:checked').length === studentIds.length ) {
-      for (var i = 0; i < numStudents; i++) {
-        tempStudentId = studentIds[i];
-        if ( $('textarea[name="student-'+tempStudentId+'-comment"]').val().trim() === '' ) {
-          $submitBtn.attr('disabled', 'disabled');
-          return;
-        }
+    for (var i = 0; i < numStudents; i++) {
+      tempStudentId = studentIds[i];
+      if ( $('textarea[name="student-'+tempStudentId+'-comment"]').val().trim() === '' ) {
+        $submitBtn.attr('disabled', 'disabled');
+        return;
       }
-      $submitBtn.removeAttr('disabled');
-    } else {
-      $submitBtn.attr('disabled', 'disabled');
     }
+    $submitBtn.removeAttr('disabled');
   }
 
   // jQuery
@@ -133,6 +127,29 @@
       }
       checkToggleSubmitBtn();
     });
+
+    $.each($('.score-input'), function(index, item) {
+      $(item).val(5);
+    });
+
+    $('.slider').slider({
+      min: 0,
+      max: 10,
+      range: "min",
+      value: 5,
+      slide: function( event, ui ) {
+        console.log(ui);
+        var score       = ui.value,
+            rgbaString  = Colors.scoreToRgba(score, 0, 10, 1);
+        $(this).closest('.submodule').find('.score-label').text(score);
+        $(this).find('div').css('background', rgbaString);
+        $(this).closest('.submodule').find('.score-input').val(score);
+      }
+    });
+    $('.slider').find('div').css('background', Colors.scoreToRgba(5, 0, 10, 1));
   });
 
 </script>
+
+
+

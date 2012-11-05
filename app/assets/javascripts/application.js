@@ -31,3 +31,21 @@ $('.flash-messages').live('click', function(e) {
   $(this).slideUp();
 });
 
+var Colors = {
+  scoreToRgba: function(score, min, max, alpha) {
+    var mid         = Math.floor((min+max)/2),
+        redValue,
+        greenValue,
+        blueValue;
+    if (score <= mid) {
+      redValue    = parseInt(38/5*score + 205),
+      greenValue  = parseInt(194/5*score + 38),
+      blueValue   = parseInt(104/5*score + 38);
+    } else {
+      redValue    = parseInt(-167/5*score + 410),
+      greenValue  = parseInt(-45/5*score + 266),
+      blueValue   = parseInt(-119/5*score + 261);
+    }
+    return 'rgba('+redValue+', '+greenValue+', '+blueValue+', '+alpha+')';
+  }
+};

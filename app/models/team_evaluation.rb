@@ -137,9 +137,6 @@ class TeamEvaluation < ActiveRecord::Base
 
     team_evaluations = self.get_recent_evaluations([:gradee], iteration_id, group_id)
 
-    logger.debug('sending group #{group_id} their team evaluations')
-    logger.debug(team_evaluations)
-
     # exploit our delivery method given an array of team evaluations. mmm, dry.
     self.deliver_evaluations_by_group_and_gradee(team_evaluations, iteration)
   end

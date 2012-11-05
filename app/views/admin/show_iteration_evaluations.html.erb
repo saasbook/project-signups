@@ -104,21 +104,20 @@
 
   function toggleHeatmap($evaluations, toggleStatus) {
     var tempScore,
-        greenPct,
-        redPct;
+        rgbaString = 'rgba(255, 255, 255, 0.5)';
+
     if (toggleStatus === 'on') {
       // turn heatmap vis on
       $.each($evaluations, function(index, item) {
-        tempScore = parseInt($(item).find('.score-value').text());
-        console.log(tempScore);
-        greenPct  = parseInt(255/10*tempScore);
-        redPct    = parseInt(255 - 255/10*tempScore);
+        tempScore   = parseInt($(item).find('.score-value').text());
+        rgbaString  = Colors.scoreToRgba(tempScore, 0, 10, 0.2);
+        console.log(rgbaString);
 
-        $(item).css('background', 'rgba('+redPct+', '+greenPct+', 0, 0.1)');
+        $(item).css('background', rgbaString);
       });
     } else if (toggleStatus === 'off') {
       // turn heatmap vis off
-      $evaluations.css('background', 'rgba(255, 255, 255, 0.5)');
+      $evaluations.css('background', rgbaString);
     }
   }
 

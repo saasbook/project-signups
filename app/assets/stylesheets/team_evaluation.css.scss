@@ -28,6 +28,26 @@
       border-radius: 7px;
     }
 
+    .slider-labels-wrapper {
+      width: 100%;
+      font-size: 10px;
+      text-align: center;
+      overflow: hidden;
+      font-weight: bold;
+      .slider-min {
+        float: left;
+      }
+
+      .slider-mid {
+        display: inline-block;
+        margin-left: 9px;
+      }
+
+      .slider-max {
+        float: right;
+      }
+    }
+
     .select-label {
       display: inline-block;
       vertical-align: text-middle;
