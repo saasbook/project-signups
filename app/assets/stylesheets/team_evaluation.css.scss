@@ -4,6 +4,7 @@
 
 .container.team-evaluations {
   text-shadow: 1px 1px 0 #fff;
+  text-align: center;
 
   .title {
     color: #7FAED3;
@@ -13,6 +14,17 @@
 		text-align: center;
 		padding: 25px 0;
 	}
+
+  .preselects-container {
+    width: 600px;
+    display: inline-block;
+    text-align: left;
+  }
+
+  .form-notice {
+    margin: 15px 0 0 0;
+    color: #a00;
+  }
 
 
   .select-container {
@@ -40,6 +52,7 @@
       font-weight: bold;
       color: #666;
       .slider-label-container {
+        opacity: 0.6;
         border-right: 1px solid #ccc;
         -webkit-box-shadow: 1px 0 0 #fff;
         -moz-box-shadow: 1px 0 0 #fff;
@@ -47,6 +60,11 @@
         height: 75px;
         &:hover {
           cursor: pointer;
+          background: rgba(255, 255, 255, 0.2);
+          opacity: 1;
+        }
+        &.selected {
+          opacity: 1;
         }
 
         vertical-align: text-top;
@@ -55,9 +73,6 @@
         padding: 0 10px;
         .slider-label-value {
           font-size: 11px;
-        }
-        .slider-label-description {
-          opacity: 0.8;
         }
         &.last {
           border-right: 0;
@@ -105,12 +120,14 @@
   }
 
   .evaluation-form-container {
+    text-align: center;
 
     &.inactive {
       display: none;
     }
 
     h4.student-name {
+      text-align: center;
       font-size: 17px;
       border-bottom: 1px solid #ccc;
       padding: 0 0 20px 0;
@@ -145,11 +162,10 @@
 	      background: #fff url('old_wall3.png');
 
         .submodule-heading {
-          text-align: left;
           padding: 10px 0;
           margin: 0;
           font-size: 13px;
-          color: #888;
+          color: #666;
           &.error {
             color: #d00;
           }
@@ -167,6 +183,8 @@
 
         .scores-container {
           .select-wrapper {
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
             text-align: center;
             width: 420px;
             margin-left: 3px;
@@ -188,9 +206,9 @@
       }
     }
     .activity-indicator {
-      display: inline-block;
+      opacity: 1;
       &.inactive {
-        display: none;
+        opacity: 0;
       }
     }
 

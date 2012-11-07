@@ -18,8 +18,8 @@ class TeamEvaluationsController < ApplicationController
     render "error" and return if @message != "success"
 
     @team_evaluations = TeamEvaluation.parse_and_create_team_evaluations(@group, @iteration, @grader, params)
-    if @team_evaluations.nil?
-      @message = "There was something wrong with your evaluation. Please refresh and try again"
+    if @team_evaluations.is_a?(String)
+      @message = @team_evaluations
       render "error" and return
     else
       @message = "Evaluation submitted"
@@ -47,7 +47,7 @@ class TeamEvaluationsController < ApplicationController
 
     if @grader_selected
       # render form for rest of group
-      @other_group_students = @group.students.find(:all, :order => "id asc")
+      @group_students = @group.students.find(:all, :order => "id asc")
     else
       # render just grader name select options
       @grader_select_options = @group.get_all_students_select_options

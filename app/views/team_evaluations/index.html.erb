@@ -1,25 +1,27 @@
 <div class="container team-evaluations">
 
-  <h1 class="heading title">Team Evaluation</h1>
+  <h1 class="heading title">Team Evaluations</h1>
 
-  <div class="select-container">
-    <div class="select-label">Iteration</div>
-    <div class="select-wrapper">
-      <%= select_tag(:"iteration-id", options_for_select(@iteration_select_options)) %>
+  <div class="preselects-container">
+    <div class="select-container">
+      <div class="select-label">Iteration</div>
+      <div class="select-wrapper">
+        <%= select_tag(:"iteration-id", options_for_select(@iteration_select_options)) %>
+      </div>
+      <div class="notice iteration-notice">Choose the iteration</div>
     </div>
-    <div class="notice iteration-notice">Choose the iteration</div>
-  </div>
 
-  <div class="select-container">
-    <div class="select-label">Group #</div>
-    <div class="select-wrapper">
-      <%= select_tag(:"group-id", options_for_select(@group_select_options)) %>
+    <div class="select-container">
+      <div class="select-label">Group #</div>
+      <div class="select-wrapper">
+        <%= select_tag(:"group-id", options_for_select(@group_select_options)) %>
+      </div>
+      <div class="notice group-notice">Choose your group</div>
     </div>
-    <div class="notice group-notice">Choose your group</div>
-  </div>
 
-  <div class="select-container grader-select-form-container">
+    <div class="select-container grader-select-form-container">
 
+    </div>
   </div>
 
   <div class="evaluation-form-container inactive">

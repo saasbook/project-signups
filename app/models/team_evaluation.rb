@@ -37,12 +37,18 @@ class TeamEvaluation < ActiveRecord::Base
     group_id = group.id
     iteration_id = iteration.id
     student_ids = group.students.map(&:id)
+    num_outstanding = 0
 
     student_ids.each do |student_id|
       # don't process or create any team eval entries if any required parameter is empty
       # or if any of scores are not within range
-      return nil if params["student-#{student_id}-score"].blank? or params["student-#{student_id}-comment"].blank?
-      return nil unless (-3..1).include?(params["student-#{student_id}-score"].to_i)
+      return "Please provide a score and some comment for everyone" if params["student-#{student_id}-score"].blank? or params["student-#{student_id}-comment"].blank?
+      return "Please provide a valid score between -3 and +1" unless (-3..1).include?(params["student-#{student_id}-score"].to_i)
+      num_outstanding += 1 if params["student-#{student_id}-score"].to_i == 1
+    end
+
+    if num_outstanding > 1
+      return "You may not assign a score of +1 to more than 1 member"
     end
 
     # if we got here, everything's been filled out and valid
