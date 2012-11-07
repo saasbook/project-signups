@@ -178,8 +178,9 @@
         var score       = ui.value;
         slideToScore($(this), score);
       },
-      animate: 500
+      animate: 200
     });
+
 
     // initialize all sliders and forms
     var initColor = Colors.scoreToRgba(0, 1);
@@ -211,8 +212,11 @@
     $sliderLabelContainers.removeClass('selected');
     $sliderLabelContainer.css('color', rgbaString);
     $sliderLabelContainer.addClass('selected');
-    $sliderBackground.animate({'backgroundColor': rgbaString}, 200);
-    $sliderKnob.animate({'backgroundColor': rgbaString}, 200);
+
+    setTimeout(function() {
+      $sliderBackground.animate({'backgroundColor': rgbaString}, 200);
+      $sliderKnob.animate({'backgroundColor': rgbaString}, 200);
+    }, 1);
 
     // update value of input
     $scoreInput.val(score);
