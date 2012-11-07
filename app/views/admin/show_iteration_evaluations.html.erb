@@ -108,13 +108,15 @@
 
   function toggleHeatmap($evaluations, toggleStatus) {
     var tempScore,
-        rgbaString = 'rgba(255, 255, 255, 0.5)';
+        rgbaString  = 'rgba(255, 255, 255, 0.5)',
+        minScore    = GradeScale['min'],
+        maxScore    = GradeScale['max'];
 
     if (toggleStatus === 'on') {
       // turn heatmap vis on
       $.each($evaluations, function(index, item) {
         tempScore   = parseInt($(item).find('.score-value').text());
-        rgbaString  = Colors.scoreToRgba(tempScore, 0, 10, 0.2);
+        rgbaString  = Colors.scoreToRgba(tempScore, 0.2);
 
         $(item).css('background', rgbaString);
       });

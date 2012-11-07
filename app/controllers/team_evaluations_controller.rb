@@ -2,6 +2,10 @@ class TeamEvaluationsController < ApplicationController
   def index
     @iteration_select_options = Iteration.get_iteration_select_options
     @group_select_options     = Group.get_group_select_options
+    respond_to do |format|
+      format.html
+      format.mobile
+    end
   end
 
 

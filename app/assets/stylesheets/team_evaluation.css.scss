@@ -5,6 +5,10 @@
 .container.team-evaluations {
   text-shadow: 1px 1px 0 #fff;
 
+  .title {
+    color: #7FAED3;
+  }
+
 	.heading {
 		text-align: center;
 		padding: 25px 0;
@@ -29,22 +33,47 @@
     }
 
     .slider-labels-wrapper {
-      width: 100%;
       font-size: 10px;
       text-align: center;
+      margin: 0;
       overflow: hidden;
       font-weight: bold;
+      color: #666;
+      .slider-label-container {
+        border-right: 1px solid #ccc;
+        -webkit-box-shadow: 1px 0 0 #fff;
+        -moz-box-shadow: 1px 0 0 #fff;
+        box-shadow: 1px 0 0 #fff;
+        height: 75px;
+        &:hover {
+          cursor: pointer;
+        }
+
+        vertical-align: text-top;
+        display: inline-block;
+        width: 80px;
+        padding: 0 10px;
+        .slider-label-value {
+          font-size: 11px;
+        }
+        .slider-label-description {
+          opacity: 0.8;
+        }
+        &.last {
+          border-right: 0;
+          -webkit-box-shadow: 0 0 0 #fff;
+          -moz-box-shadow: 0 0 0 #fff;
+          box-shadow: 0 0 0 #fff;
+        }
+      }
       .slider-min {
         float: left;
-      }
-
-      .slider-mid {
-        display: inline-block;
-        margin-left: 9px;
+        color: #d00;
       }
 
       .slider-max {
         float: right;
+        color: #4CBB17;
       }
     }
 
@@ -116,19 +145,31 @@
 	      background: #fff url('old_wall3.png');
 
         .submodule-heading {
+          text-align: left;
           padding: 10px 0;
           margin: 0;
           font-size: 13px;
-          color: #555;
+          color: #888;
           &.error {
             color: #d00;
+          }
+          .score-label {
+            display: inline-block;
+          }
+          .text-for-score {
+            display: inline-block;
+            margin: 0 0 0 30px;
+            font-weight: normal;
+            color: #333;
+            font-size: 11px;
           }
         }
 
         .scores-container {
           .select-wrapper {
             text-align: center;
-            width: 510px;
+            width: 420px;
+            margin-left: 3px;
             &.error {
               border: 1px solid #d00;
             }
@@ -137,14 +178,12 @@
             text-align: center;
             display: inline-block;
             padding: 15px 10px 10px 10px;
-            .score-label {
-              font-size: 11px;
-            }
           }
         }
 
         .submodule {
           padding: 10px 0;
+          text-align: center;
         }
       }
     }

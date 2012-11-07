@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :check_authorization
+  before_filter :prepare_for_mobile  
   layout "application"
 
   protected
@@ -15,4 +16,14 @@ class ApplicationController < ActionController::Base
       redirect_to :root and return false
     end
   end
+
+
+  private
+    def mobile_device?
+      request.user_agent =~ /Mobile|webOS/
+    end
+
+    def prepare_for_mobile
+      request.format = :mobile if mobile_device?
+    end
 end

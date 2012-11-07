@@ -6,19 +6,36 @@
   <% @other_group_students.each_with_index do |student, index| %>
     <div class="evaluation-module-wrapper">
       <div class="evaluation-module" data-student-id="<%= student.id %>">
-        <h4 class="student-name"><%= student.full_name %></h4>
+        <h4 class="student-name title"><%= student.full_name %></h4>
 
         <div class="scores-container select-container submodule">
-          <h4 class="submodule-heading">Score: <span class="score-label">5</span></h4>
+          <h4 class="submodule-heading">Score: <span class="score-label"></span></h4>
 
           <div class="select-wrapper">
             <%= hidden_field_tag :"student-#{student.id}-score", 5, :class => "score-input" %>
             <div class="slider"></div>
           </div>
           <div class="slider-labels-wrapper">
-            <span class="slider-min">0</span>
-            <span class="slider-mid">5</span>
-            <span class="slider-max">10</span>
+            <div class="slider-label-container">
+              <div class="slider-label-value">-3</div>
+              <div class="slider-label-description">Contributed nothing</div>
+            </div>
+            <div class="slider-label-container">
+              <div class="slider-label-value">-2</div>
+              <div class="slider-label-description">Contributed a lot less than others</div>
+            </div>
+            <div class="slider-label-container">
+              <div class="slider-label-value">-1</div>
+              <div class="slider-label-description">Contributed a little less than others</div>
+            </div>
+            <div class="slider-label-container">
+              <div class="slider-label-value">0</div>
+              <div class="slider-label-description">Contributed equally</div>
+            </div>
+            <div class="slider-label-container last">
+              <div class="slider-label-value">+1</div>
+              <div class="slider-label-description">Contributed a lot more than others</div>
+            </div>
           </div>
         </div>
 
@@ -129,24 +146,58 @@
     });
 
     $.each($('.score-input'), function(index, item) {
-      $(item).val(5);
+      $(item).val(0);
+    });
+
+    $('.slider-label-container').live('click', function(e) {
+      var newScore  = $(this).index() - 3,
+          $slider   = $(this).closest('.submodule').find('.slider');
+
+      $slider.slider('value', newScore);
+      slideToScore($slider, newScore);
     });
 
     $('.slider').slider({
-      min: 0,
-      max: 10,
-      range: "min",
-      value: 5,
+      min: GradeScale['min'],
+      max: GradeScale['max'],
+      range: 'min',
+      value: 0,
       slide: function( event, ui ) {
-        var score       = ui.value,
-            rgbaString  = Colors.scoreToRgba(score, 0, 10, 1);
-        $(this).closest('.submodule').find('.score-label').text(score);
-        $(this).find('div').css('background', rgbaString);
-        $(this).closest('.submodule').find('.score-input').val(score);
+        var score       = ui.value;
+        slideToScore($(this), score);
       }
     });
-    $('.slider').find('div').css('background', Colors.scoreToRgba(5, 0, 10, 1));
+
+    // initialize all sliders and forms
+    var initColor = Colors.scoreToRgba(0, 1);
+    $('.slider').find('div').css('background', initColor);
+    $('.slider').find('a').css('background', initColor);
+    $('.slider').closest('.submodule').find('.score-label').text(0).css('color', initColor);
+    $('.slider-label-container:nth-child(4)').css('color', initColor);
+
   });
+
+  function slideToScore($slider, score) {
+    var rgbaString              = Colors.scoreToRgba(score, 1),
+        $sliderSubmodule        = $slider.closest('.submodule'),
+        $sliderLabelContainers  = $sliderSubmodule.find('.slider-label-container'),
+        $sliderLabelContainer   = $sliderSubmodule.find('.slider-label-container:nth-child('+(score+4)+')'),
+        $scoreLabel             = $sliderSubmodule.find('.score-label'),
+        $scoreInput             = $sliderSubmodule.find('.score-input'),
+        $sliderBackground       = $slider.find('div'),
+        $sliderKnob             = $slider.find('a');
+
+    $sliderLabelContainers.css('color', '#333');
+    $sliderLabelContainer.css('color', rgbaString);
+    if (score == 1) {
+      score = '+1';
+    }
+
+    $scoreLabel.text(score).css('color', rgbaString);
+    $scoreInput.val(score);
+    $sliderBackground.css('background', rgbaString);
+    $sliderKnob.css('background', rgbaString);
+  }
 
 </script>
 

@@ -1,0 +1,6 @@
+<% content_for :title do %>
+  Team Evaluations
+<% end  %>
+
+<h2>Choose Iteration</h2>
+<%= select_tag(:"iteration-id", options_for_select(@iteration_select_options)) %>

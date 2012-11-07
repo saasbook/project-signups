@@ -10,7 +10,7 @@ class TeamEvaluation < ActiveRecord::Base
   validates_presence_of :comment
   validates_presence_of :group_id
 
-  validates :score, :inclusion => 0..10
+  validates :score, :inclusion => -3..1
 
   def self.validate_evaluation(group, iteration, grader)
     if group.nil?
@@ -42,7 +42,7 @@ class TeamEvaluation < ActiveRecord::Base
       # don't process or create any team eval entries if any required parameter is empty
       # or if any of scores are not within range
       return nil if params["student-#{student_id}-score"].blank? or params["student-#{student_id}-comment"].blank?
-      return nil unless (0..10).include?(params["student-#{student_id}-score"].to_i)
+      return nil unless (-3..1).include?(params["student-#{student_id}-score"].to_i)
     end
 
     # if we got here, everything's been filled out and valid
