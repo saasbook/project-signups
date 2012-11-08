@@ -116,7 +116,7 @@
       // turn heatmap vis on
       $.each($evaluations, function(index, item) {
         tempScore   = parseInt($(item).find('.score-value').text());
-        rgbaString  = Colors.scoreToRgba(tempScore, 0.7);
+        rgbaString  = Colors.scoreToRgba(tempScore, 0.25);
 
         $(item).css('background', rgbaString);
       });
