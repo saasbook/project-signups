@@ -121,6 +121,7 @@
 
   .evaluation-form-container {
     text-align: center;
+    overflow: hidden;
 
     &.inactive {
       display: none;
