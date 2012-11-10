@@ -55,23 +55,12 @@ class AdminController < ApplicationController
 
   def show_iteration_evaluations
     if request.xhr?
-      iteration_id = params[:iteration_id]
+      iteration_id  = params[:iteration_id]
       @iteration = Iteration.find_by_id(iteration_id)
       render :nothing => true and return if @iteration.nil?
 
-      distinct_clause = "grader_id, gradee_id"
-      group_by_clause = [:grader_id, :gradee_id]
-      order_by_clause = "grader_id desc, gradee_id desc, created_at desc"
       includes_clause = [:grader, :gradee, :group]
-      conditions_clause = ["iteration_id = ?", iteration_id]
-
-      if Rails.env.development?
-        # find a way to make this call work on both environments
-        @team_evaluations = TeamEvaluation.find(:all, :conditions => conditions_clause, :order => "created_at desc", :group => group_by_clause, :include => includes_clause)
-      else
-        @team_evaluations = TeamEvaluation.select("distinct on (#{distinct_clause}) grader_id, gradee_id, iteration_id, id, created_at, group_id, score, comment, delivered").where(
-          conditions_clause).order(order_by_clause).includes(includes_clause)
-      end
+      @team_evaluations = TeamEvaluation.get_recent_evaluations(includes_clause, iteration_id, group_id = nil, ignore_delivered = true)
 
       @team_evaluations_for_group_hash = @team_evaluations.group_by { |evaluation| evaluation.group_id }
 
@@ -81,7 +70,6 @@ class AdminController < ApplicationController
       end
 
       @students_for_group_hash = Student.all.group_by {|student| student.group_id}
-      logger.debug(@team_evaluations_for_group_hash)
     else
       @iteration_select_options = Iteration.get_iteration_select_options
     end

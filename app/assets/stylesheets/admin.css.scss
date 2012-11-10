@@ -36,6 +36,13 @@
     -moz-box-shadow: 0 1px 0 #fff;
     box-shadow: 0 1px 0 #fff;
     &.team-evaluations-container {
+      .activity-indicator {
+        text-align: center;
+        &.inactive {
+          display: none;
+        }
+      }
+
       .heatmap-container {
         display: inline-block;
         &.inactive {
@@ -109,7 +116,7 @@
       font-size: 12px;
     }
     .grader-axis {
-      left: 480px;
+      left: 440px;
       top: 50px;
     }
     .gradee-axis {

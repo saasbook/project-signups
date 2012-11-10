@@ -108,7 +108,7 @@ class TeamEvaluation < ActiveRecord::Base
     return evaluations_for_gradee_hash
   end
 
-  def self.get_recent_evaluations(include_assocs, iteration_id = nil, group_id = nil)
+  def self.get_recent_evaluations(include_assocs, iteration_id = nil, group_id = nil, ignore_delivered = false, page = nil)
     distinct_clause = "grader_id, gradee_id"
     group_by_clause = [:grader_id, :gradee_id]
     order_by_clause = "grader_id desc, gradee_id desc, created_at desc"
@@ -116,8 +116,15 @@ class TeamEvaluation < ActiveRecord::Base
       # we deliver to a specific group
       conditions = ["iteration_id = ? and group_id = ?", iteration_id, group_id]
     elsif iteration_id.present?
-      # we deliver all evaluations for a specific iteration
-      conditions = ["iteration_id = ? and delivered = ?", iteration_id, false]
+      # find all evaluations for a specific iteration
+      if ignore_delivered == false
+        # by default, assumes we find evaluations that have not been emailed out
+        conditions = ["iteration_id = ? and delivered = ?", iteration_id, false]
+      else
+        # otherwise, get all evaluations for this iteration, regardless of delivery status
+        # requires a param
+        conditions = ["iteration_id = ?", iteration_id]
+      end
     else
       # student index page, get all recent evaluations
       conditions = []

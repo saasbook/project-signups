@@ -19,6 +19,10 @@
       </div>
     </div>
 
+    <div class="activity-indicator inactive">
+      <%= image_tag "activity.gif" %>
+    </div>
+
 
     <section class="team-evaluations-wrapper"></section>
   </div>
@@ -28,13 +32,17 @@
   $().ready(function() {
     $('#iteration-id').live('change', function() {
       var iterationId = $(this).val();
-      $.ajax({
-        url: '<%= admin_show_iteration_evaluations_path() %>',
-        data: { 'iteration_id': iterationId },
-        beforeSend: function(xhr, settings) {
-          xhr.setRequestHeader('accept', '*/*;q=0.5, ' + settings.accepts.script);
-        }
-      });
+      if (iterationId != '') {
+        $('.team-evaluations-wrapper').empty();
+        $('.activity-indicator').removeClass('inactive');
+        $.ajax({
+          url: '<%= admin_show_iteration_evaluations_path() %>',
+          data: { 'iteration_id': iterationId },
+          beforeSend: function(xhr, settings) {
+            xhr.setRequestHeader('accept', '*/*;q=0.5, ' + settings.accepts.script);
+          }
+        });
+      }
     });
 
     $('td').live('hover', function(e) {
