@@ -25,7 +25,7 @@ class Group < ActiveRecord::Base
   end
 
   def self.get_group_select_options
-    groups = Group.all
+    groups = Group.find(:all, :order => "id asc")
     group_select_options = groups.map(&:id).zip(groups.map(&:id)).unshift([])
     return group_select_options
   end

@@ -1,19 +1,81 @@
 <div class="container admin">
-	<h1>Admin</h1>
+	<h1>Admin Settings</h1>
+
+  <%= form_tag admin_update_settings_path() do %>
 
   <div class="settings-container panel">
-    <h2>Settings</h2>
-
-    <%= form_for @settings, :url => admin_update_settings_path do |f| %>
+    <h2>Project Preferences</h2>
     <div class="field last">
-      <span class="label">Maximum Project Preferences</span>	<%= f.number_field :max_project_preferences, :value => @max_project_preferences, :min => 1, :max => 10 %>
+      <span class="label">Maximum Project Preferences</span>	<%= number_field_tag :max_project_preferences, @max_project_preferences, :min => 1, :max => 10 %>
     </div>
-    <div class="actions">
-      <%= f.submit "Save Preferences", :class => "btn" %>
-    </div>
-    <% end %>
   </div>
 
 
+  <div class="settings-container panel last">
+    <h2>Iterations</h2>
+    <ul class="iterations-list">
+    <% @iterations.each do |iteration| %>
+      <li>
+        <div class="iteration-container">
+          <div class="iteration-wrapper">
+            <span class="iteration-name"><%= iteration.name %></span>: 
+            <%= iteration.due_date.strftime("%a, %b %d %l:%M:%S %p") %>
+            <%= link_to "Edit", "#", :class => "edit-iteration" %>
+            <%= link_to "Delete", "#", :class => "delete-iteration", :"data-iteration-id" => iteration.id %>
+          </div>
+          <div class="iteration-wrapper inactive">
+            <span class="label">Iteration name:</span>	<%= text_field_tag :name, "" %>
+            <div class="field last">
+              <span class="label">Due date:</span>	<%= datetime_select(@iteration, :due_date, :include_seconds => true, :ampm => true) %>
+            </div>
+            <%= link_to "Save", "#", :class => "btn update-iteration" %>
+            <%= link_to "Cancel", "#", :class => "edit-iteration" %>
+          </div>
+        </div>
+      </li>
+    <% end %>
+    </ul>
+
+    <h3>Create New Iteration</h3>
+
+    <div class="field last">
+      <span class="label">Iteration name:</span>	<%= text_field_tag :"new-iteration-name", "" %>
+    </div>
+    <div class="field last">
+      <span class="label">Due date:</span>	<%= datetime_select(:"new-iteration-due-date", :due_date, :include_seconds => true, :ampm => true) %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= submit_tag "Save", :class => "btn" %>
+  </div>
+
+  <% end %>
 </div>
 
+<script type="text/javascript">
+  $().ready(function() {
+    $('.edit-iteration').live('click', function(e) {
+      $iterationWrappers = $(this).closest('.iteration-container').find('.iteration-wrapper');
+      $iterationWrappers.toggleClass('inactive');
+      e.preventDefault();
+    });
+
+    $('.update-iteration').live('click', function(e) {
+      console.log('fire ajax');
+    });
+
+    $('.delete-iteration').live('click', function(e) {
+      var confirmVal  = confirm('Are you sure you want to delete this iteration?'),
+          iterationId = $(this).attr('data-iteration-id');
+
+      if (confirmVal) {
+        $.ajax({
+          url: '<%= admin_delete_iteration_path %>',
+          data: { 'iteration_id': iterationId }
+        });
+      }
+    });
+  });
+
+</script>

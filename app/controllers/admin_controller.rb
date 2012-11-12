@@ -3,17 +3,21 @@ class AdminController < ApplicationController
 
   def index
     @settings = AdminSetting.first || AdminSetting.new
+    @iterations = Iteration.all
+    @iteration = Iteration.new
     @max_project_preferences = @settings.max_project_preferences || 5
   end
 
   def update
     @settings = AdminSetting.first || AdminSetting.new
-    @settings.max_project_preferences = params[:admin_setting][:max_project_preferences]
+    @settings.max_project_preferences = params[:max_project_preferences]
     if @settings.save
       flash[:notice] = "Preferences saved!"
     else
       flash[:error] = "Could not save preferences"
     end
+
+
 
     redirect_to admin_path and return
   end
@@ -68,12 +72,20 @@ class AdminController < ApplicationController
         # index each one by recipient and grader. ezpz
         @team_evaluations_for_group_hash[group_id] = evaluations.index_by { |evaluation| [evaluation.gradee_id, evaluation.grader_id] }
       end
+      @team_evaluations_for_group_hash = Hash[@team_evaluations_for_group_hash.sort]
 
       @students_for_group_hash = Student.all.group_by {|student| student.group_id}
     else
       @iteration_select_options = Iteration.get_iteration_select_options
     end
 
+  end
+
+
+  def delete_iteration
+    @iteration = Iteration.find_by_id(params[:iteration_id])
+    render :nothing => true and return if @iteration.nil?
+    @iteration.destroy
   end
 
 end
