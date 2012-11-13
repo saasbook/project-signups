@@ -28,6 +28,10 @@
 
   </div>
 
+  <div class="activity-indicator inactive">
+    <%= image_tag "activity.gif" %>
+  </div>
+
   <div class="preload-img"></div>
 
 </div>
@@ -37,10 +41,14 @@
   var EvaluationForm  = { 'formData': {} };
   EvaluationForm.renderForm = function() {
     var formData = this['formData'];
+    $('.activity-indicator').removeClass('inactive');
+    $('.evaluation-form-container').empty();
     $.ajax({
       type: 'GET',
       url: '<%= new_team_evaluation_path() %>',
       data: formData
+    }).success(function(data) {
+      $('.activity-indicator').addClass('inactive');
     });
   }
 

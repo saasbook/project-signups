@@ -119,6 +119,13 @@
     }
   }
 
+  .activity-indicator {
+    text-align: center;
+    &.inactive {
+      display: none;
+    }
+  }
+
   .evaluation-form-container {
     text-align: center;
     overflow: hidden;
