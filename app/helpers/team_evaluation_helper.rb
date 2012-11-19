@@ -49,22 +49,22 @@ module TeamEvaluationHelper
   def team_evaluation_table(group_id, indexed_evaluations, students)
     s = %{}
     indices = indexed_evaluations.keys
-    student_ids = students.map(&:id)
+    student_ids = students.map(&:id).unshift("dummy")
     student_for_id_hash = students.index_by {|student| student.id}
-    lowest_student_id = student_ids.min
-    highest_student_id = student_ids.max
 
     s += %{ <section class="group-evaluations-wrapper">
               <div class="axis grader-axis">Evaluators</div>
               <div class="axis gradee-axis">Recipients</div>}
 
     s += %{<table class="group-#{group_id}-evaluations">}
-    (lowest_student_id-1..highest_student_id).each do |gradee_id|
+    student_ids.each do |gradee_id|
+    # (lowest_student_id-1..highest_student_id).each do |gradee_id|
       s += %{<tr>}
-      (lowest_student_id-1..highest_student_id).each do |grader_id|
-        if !student_ids.include?(gradee_id)
+      student_ids.each do |grader_id|
+      #(lowest_student_id-1..highest_student_id).each do |grader_id|
+        if gradee_id == "dummy"
           # first row, output grader name from grader_id
-          if !student_ids.include?(grader_id)
+          if grader_id == "dummy"
             # first col
             s += %{<td class="definition">
                       <h2 class="group-label">Group #{group_id}</h2>
@@ -73,7 +73,7 @@ module TeamEvaluationHelper
             s += %{<td class="grader-label">#{student_for_id_hash[grader_id].full_name}</td>}
           end
         else
-          if !student_ids.include?(grader_id)
+          if grader_id == "dummy"
             # first column, output gradee name
             s += %{<td class="gradee-label">#{student_for_id_hash[gradee_id].full_name}</td>}
           else

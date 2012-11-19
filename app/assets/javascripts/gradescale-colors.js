@@ -3,12 +3,12 @@
 var GradeScale = {
   'min': -3,
   'max': 1,
-  'textForScore': {
-    '-3': 'Contributed nothing',
-    '-2': 'Contributed a lot less than others',
-    '-1': 'Contributed a little less than others',
-    '0' : 'Contributed equally',
-    '1' : 'Contributed a lot more than everyone else'
+  'rgbaForScore': {
+    '-3': { 'red': 205, 'green': 38, 'blue': 38 },
+    '-2': { 'red': 224, 'green': 120, 'blue': 30 },
+    '-1': { 'red': 244, 'green': 202, 'blue': 22 },
+    '0' : { 'red': 76, 'green': 187, 'blue': 23 },
+    '1' : { 'red': 127, 'green': 174, 'blue': 211 }
   }
 }
 

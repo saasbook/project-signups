@@ -34,7 +34,7 @@ class AdminController < ApplicationController
       @message = "Evaluation score updated!"
       @success = true
     else
-      @message = "Please enter a valid score (0-10)"
+      @message = "Please enter a valid score (-3 to 1)"
       @success = false
     end
   end

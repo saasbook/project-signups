@@ -42,6 +42,16 @@
       -moz-border-radius: 7px;
       -webkit-border-radius: 7px;
       border-radius: 7px;
+
+      .slider {
+        .ui-slider-range, .ui-slider-handle {
+          -webkit-transition: background-color 400ms linear;
+          -moz-transition: background-color 400ms linear;
+          -o-transition: background-color 400ms linear;
+          -ms-transition: background-color 400ms linear;
+          transition: background-color 400ms linear;
+        }
+      }
     }
 
     .slider-labels-wrapper {
@@ -50,30 +60,38 @@
       margin: 0;
       overflow: hidden;
       font-weight: bold;
-      color: #666;
       .slider-label-container {
-        opacity: 0.6;
         border-right: 1px solid #ccc;
         -webkit-box-shadow: 1px 0 0 #fff;
         -moz-box-shadow: 1px 0 0 #fff;
         box-shadow: 1px 0 0 #fff;
         height: 75px;
-        &:hover {
-          cursor: pointer;
-          background: rgba(255, 255, 255, 0.2);
-          opacity: 1;
-        }
-        &.selected {
-          opacity: 1;
-        }
 
         vertical-align: text-top;
         display: inline-block;
         width: 80px;
         padding: 0 10px;
+        a {
+          color: #333;
+          display: block;
+          opacity: 0.6;
+          text-decoration: none;
+          &:hover {
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.2);
+            opacity: 1;
+          }
+          &.selected {
+            opacity: 1;
+          }
+        }
         .slider-label-value {
           font-size: 11px;
         }
+        .slider-label-description {
+          font-size: 10px;
+        }
+
         &.last {
           border-right: 0;
           -webkit-box-shadow: 0 0 0 #fff;

@@ -19,24 +19,24 @@
           </div>
           <div class="slider-labels-wrapper">
             <div class="slider-label-container">
-              <div class="slider-label-value">-3</div>
-              <div class="slider-label-description">Contributed nothing</div>
+              <a class="slider-label-value">-3</a>
+              <a class="slider-label-description">Contributed nothing</a>
             </div>
             <div class="slider-label-container">
-              <div class="slider-label-value">-2</div>
-              <div class="slider-label-description">Contributed a lot less than others</div>
+              <a class="slider-label-value">-2</a>
+              <a class="slider-label-description">Contributed a lot less than others</a>
             </div>
             <div class="slider-label-container">
-              <div class="slider-label-value">-1</div>
-              <div class="slider-label-description">Contributed a little less than others</div>
+              <a class="slider-label-value">-1</a>
+              <a class="slider-label-description">Contributed a little less than others</a>
             </div>
             <div class="slider-label-container">
-              <div class="slider-label-value">0</div>
-              <div class="slider-label-description">Contributed equally</div>
+              <a class="slider-label-value">0</a>
+              <a class="slider-label-description">Contributed equally</a>
             </div>
             <div class="slider-label-container last">
-              <div class="slider-label-value">+1</div>
-              <div class="slider-label-description">Contributed a lot more than others</div>
+              <a class="slider-label-value">+1</a>
+              <a class="slider-label-description">Contributed a lot more than others</a>
             </div>
           </div>
         </div>
@@ -166,7 +166,6 @@
           $slider   = $(this).closest('.submodule').find('.slider');
 
       slideToScore($slider, newScore);
-
     });
 
     $('.slider').slider({
@@ -187,15 +186,15 @@
     $('.slider').find('div').css('background', initColor);
     $('.slider').find('a').css('background', initColor);
     $('.slider').closest('.submodule').find('.score-label').text(0).css('color', initColor);
-    $('.slider-label-container:nth-child(4)').css('color', initColor).addClass('selected');
+    $('.slider-label-container:nth-child(4)').find('a').css('color', initColor).addClass('selected');
 
   });
 
   function slideToScore($slider, score) {
     var rgbaString              = Colors.scoreToRgba(score, 1),
         $sliderSubmodule        = $slider.closest('.submodule'),
-        $sliderLabelContainers  = $sliderSubmodule.find('.slider-label-container'),
-        $sliderLabelContainer   = $sliderSubmodule.find('.slider-label-container:nth-child('+(score+4)+')'),
+        $sliderLabels           = $sliderSubmodule.find('.slider-label-container').find('a'),
+        $sliderLabel            = $sliderSubmodule.find('.slider-label-container:nth-child('+(score+4)+')').find('a'),
         $scoreLabel             = $sliderSubmodule.find('.score-label'),
         $scoreInput             = $sliderSubmodule.find('.score-input'),
         $sliderBackground       = $slider.find('div'),
@@ -208,14 +207,14 @@
     $slider.slider('value', score);
 
     // set colors of description labels and slider
-    $sliderLabelContainers.css('color', '#333');
-    $sliderLabelContainers.removeClass('selected');
-    $sliderLabelContainer.css('color', rgbaString);
-    $sliderLabelContainer.addClass('selected');
+    $sliderLabels.css('color', '#333');
+    $sliderLabels.removeClass('selected');
+    $sliderLabel.css('color', rgbaString);
+    $sliderLabel.addClass('selected');
 
     setTimeout(function() {
-      $sliderBackground.animate({'backgroundColor': rgbaString}, 200);
-      $sliderKnob.animate({'backgroundColor': rgbaString}, 200);
+      $sliderBackground.css('background', rgbaString);
+      $sliderKnob.css('background', rgbaString);
     }, 1);
 
     // update value of input

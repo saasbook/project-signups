@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :check_authorization
-  before_filter :prepare_for_mobile  
+  # before_filter :prepare_for_mobile
   layout "application"
 
   protected
