@@ -3,24 +3,23 @@ class AdminController < ApplicationController
 
   def index
     @settings = AdminSetting.first || AdminSetting.new
-    @iterations = Iteration.all
+    @iterations = Iteration.find(:all, :order => "created_at asc")
     @iteration = Iteration.new
     @max_project_preferences = @settings.max_project_preferences || 5
   end
 
-  def update
+  def update_project_preferences
     @settings = AdminSetting.first || AdminSetting.new
     @settings.max_project_preferences = params[:max_project_preferences]
     if @settings.save
-      flash[:notice] = "Preferences saved!"
+      @message = "Preferences saved!"
+      @success = true
     else
-      flash[:error] = "Could not save preferences"
+      @message = "Could not save preferences"
     end
 
-
-
-    redirect_to admin_path and return
   end
+
 
   def update_team_evaluation
     evaluation_id = params[:evaluation_id]
@@ -78,9 +77,29 @@ class AdminController < ApplicationController
     else
       @iteration_select_options = Iteration.get_iteration_select_options
     end
-
   end
 
+  def create_iteration
+    name = params[:new_iteration_name]
+    due_date_hash = params[:new_iteration_due_date]
+    year = due_date_hash["due_date(1i)"].to_i
+    month = due_date_hash["due_date(2i)"].to_i
+    date = due_date_hash["due_date(3i)"].to_i
+    hour = due_date_hash["due_date(4i)"].to_i
+    minute = due_date_hash["due_date(5i)"].to_i
+    second = due_date_hash["due_date(6i)"].to_i
+
+    due_date = DateTime.civil(year, month, date, hour, minute, second)
+
+    @iteration = Iteration.new(:name => name, :due_date => due_date)
+    if @iteration.save
+      @success = true
+      @message = "Iteration Created!"
+      @iterations = Iteration.find(:all, :order => "created_at asc")
+    else
+      @message = "Error creating iteration"
+    end
+  end
 
   def delete_iteration
     @iteration = Iteration.find_by_id(params[:iteration_id])

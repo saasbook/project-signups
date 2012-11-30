@@ -1,6 +1,7 @@
 class Iteration < ActiveRecord::Base
   has_many :team_evaluations
-
+  validates_presence_of :name
+  validates_presence_of :due_date
 
   def self.get_iteration_select_options
     iterations = Iteration.find(:all, :order => "due_date asc")

@@ -30,7 +30,8 @@ ProjectSignups::Application.routes.draw do
   resources :team_evaluations
 
   match 'admin' => 'admin#index', :as => :admin
-  match 'admin/update_settings' => 'admin#update', :as => :admin_update_settings
+  match 'admin/update_project_preferences' => 'admin#update_project_preferences', :as => :admin_update_project_preferences
+  match 'admin/create_iteration' => 'admin#create_iteration', :as => :admin_create_iteration
   match 'admin/delete_iteration' => 'admin#delete_iteration', :as => :admin_delete_iteration
   match 'admin/update_team_evaluation_path' => 'admin#update_team_evaluation', :as => :admin_update_team_evaluation
   match 'admin/email_team_evaluations' => 'admin#email_team_evaluations', :as => :admin_email_team_evaluations

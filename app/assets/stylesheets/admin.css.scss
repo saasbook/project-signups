@@ -27,6 +27,9 @@
       display: inline-block;
 			width: 210px;
 		}
+    &.last {
+      padding: 10px 0 15px 0;
+    }
 	}
 
   .panel {

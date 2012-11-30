@@ -1,0 +1,4 @@
+showFlashMessage('<%= escape_javascript(@message) %>', '<%= @success == true ? "notice" : "error" %>');
+<% if @success %>
+    $('.iterations-list-wrapper').html('<%= escape_javascript(render :partial => "iterations_list") %>');
+<% end %>

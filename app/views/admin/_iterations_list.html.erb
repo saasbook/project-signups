@@ -1,0 +1,22 @@
+<ul class="iterations-list">
+<% @iterations.each do |iteration| %>
+  <li>
+    <div class="iteration-container">
+      <div class="iteration-wrapper">
+        <span class="iteration-name"><%= iteration.name %></span>: 
+        <%= iteration.due_date.strftime("%a, %b %d %l:%M:%S %p") %>
+        <%= link_to "Edit", "#", :class => "edit-iteration" %>
+        <%= link_to "Delete", "#", :class => "delete-iteration", :"data-iteration-id" => iteration.id %>
+      </div>
+      <div class="iteration-wrapper inactive">
+        <span class="label">Iteration name:</span>	<%= text_field_tag :name, "" %>
+        <div class="field last">
+          <span class="label">Due date:</span>	<%= datetime_select(@iteration, :due_date, :include_seconds => true, :ampm => true) %>
+        </div>
+        <%= link_to "Save", "#", :class => "btn update-iteration" %>
+        <%= link_to "Cancel", "#", :class => "edit-iteration" %>
+      </div>
+    </div>
+  </li>
+<% end %>
+</ul>
