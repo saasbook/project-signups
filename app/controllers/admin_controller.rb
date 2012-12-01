@@ -2,10 +2,21 @@ class AdminController < ApplicationController
   before_filter :authenticate_admin!
 
   def index
-    @settings = AdminSetting.first || AdminSetting.new
-    @iterations = Iteration.find(:all, :order => "created_at asc")
-    @iteration = Iteration.new
-    @max_project_preferences = @settings.max_project_preferences || 5
+    if request.xhr?
+      # ajax load
+      @type = params[:type]
+      if @type == "project_preferences"
+        @settings = AdminSetting.first || AdminSetting.new
+        @max_project_preferences = @settings.max_project_preferences || 5
+      elsif @type == "iterations"
+        @iterations = Iteration.find(:all, :order => "created_at asc")
+        @iteration = Iteration.new
+      end
+    else
+      # nonXHR request, just load project preferences
+      @settings = AdminSetting.first || AdminSetting.new
+      @max_project_preferences = @settings.max_project_preferences || 5
+    end
   end
 
   def update_project_preferences
@@ -104,7 +115,12 @@ class AdminController < ApplicationController
   def delete_iteration
     @iteration = Iteration.find_by_id(params[:iteration_id])
     render :nothing => true and return if @iteration.nil?
-    @iteration.destroy
+    if @iteration.destroy
+      @success = true
+      @message = "Iteration destroyed"
+    else
+      @message = "Could not destroy iteration"
+    end
   end
 
 end

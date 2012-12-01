@@ -1,0 +1,2 @@
+showFlashMessage('<%= escape_javascript(@message) %>', '<%= @success == true ? "notice" : "error" %>');
+$('.iteration-item[data-iteration-id="<%= @iteration.id %>"]').remove();

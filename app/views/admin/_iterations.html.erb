@@ -1,0 +1,23 @@
+<div class="all-iterations-container panel">
+  <h2>Iterations</h2>
+  <div class="iterations-list-wrapper">
+    <%= render :partial => "iterations_list" %>
+  </div>
+</div>
+
+<div class="create-iteration-container panel last">
+  <h2>Create New Iteration</h2>
+  <%= form_tag admin_create_iteration_path(), :class => "new-iteration-form", :remote => true do %>
+
+  <div class="field">
+    <span class="label">Iteration name:</span>	<%= text_field_tag :new_iteration_name, "" %>
+  </div>
+  <div class="field last">
+    <span class="label">Due date:</span>	<%= datetime_select(:new_iteration_due_date, :due_date, :include_seconds => true, :ampm => true) %>
+  </div>
+
+  <div class="actions">
+    <%= submit_tag "Create Iteration", :class => "btn" %>
+  </div>
+  <% end %>
+</div>

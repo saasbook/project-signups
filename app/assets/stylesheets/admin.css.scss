@@ -4,6 +4,7 @@
 
 .container.admin {
   position: relative;
+  height: 600px;
 
   text-shadow: 1px 1px 0 #fff;
 	h1 {
@@ -66,13 +67,6 @@
     }
 
     &.team-evaluations-container {
-      .activity-indicator {
-        text-align: center;
-        &.inactive {
-          display: none;
-        }
-      }
-
       .heatmap-container {
         display: inline-block;
         &.inactive {
@@ -278,6 +272,68 @@
       .label {
         font-weight: bold;
       }
+    }
+  }
+
+  /* admin panel shit */
+  aside.sidebar {
+    float: left;
+    width: 200px;
+    height: 100%;
+
+    -webkit-box-shadow: 1px 0 0 #ccc;
+    -moz-box-shadow: 1px 0 0 #ccc;
+    box-shadow: 1px 0 0 #ccc;
+
+    h1 {
+      padding: 20px 10px 10px 10px;
+      margin: 0;
+      font-size: 14px;
+    }
+    
+    ul.settings-list {
+      border-top: 1px solid #ccc;
+      padding: 0;
+      margin: 0;
+      list-style-type: none;
+      li.setting-item {
+        a.item-option {
+          text-decoration: none;
+          display: block;
+          padding: 15px 20px;
+          &:hover {
+            background: #f9f9f9;
+          }
+        }
+      }
+    }
+  }
+
+  section.settings-panel {
+    width: 760px;
+    float: left;
+
+    .new-iteration-form {
+      padding: 10px;
+    }
+
+    .panel {
+      padding: 0 0 20px 0;
+    }
+
+    .setting-option-container {
+      padding: 10px 0 0 30px;
+      overflow-y: auto;
+      height: 600px;
+    }
+
+  }
+
+  .activity-indicator {
+    padding: 20px 0;
+    text-align: center;
+    &.inactive {
+      display: none;
     }
   }
 }

@@ -45,6 +45,13 @@
 	<div class="menu-wrapper">
 	<h2>Admin</h2>
 	<ul class="plain">
+		<%= link_to admin_path do %>
+		<li class="menu-item"> 
+			<div class="icon icon-admin-panel"></div>
+      Admin Panel
+		</li>
+		<% end %>
+
 		<%= link_to students_path do %> 
 		<li class="menu-item"> 
 			<div class="icon icon-students"></div>

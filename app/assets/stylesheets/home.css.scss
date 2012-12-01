@@ -98,6 +98,12 @@
             }
           }
           
+          &.icon-admin-panel {
+            background: url('icon-admin-panel.png');
+            &:hover {
+              background: url('icon-admin-panel-hover.png');
+            }
+          }
         }
       }
     }

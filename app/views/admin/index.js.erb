@@ -1,1 +1,2 @@
-$('section.team-evaluations-wrapper').html('<%= escape_javascript(render :partial => "team_evaluations_list") %>');
+$('section.settings-panel .setting-option-container').html('<%= escape_javascript(render :partial => @type) %>');
+$('.activity-indicator').addClass('inactive');

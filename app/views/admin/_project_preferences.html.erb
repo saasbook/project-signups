@@ -1,0 +1,13 @@
+<div class="settings-container panel last">
+  <%= form_tag admin_update_project_preferences_path(), :remote => true do %>
+  <h2>Project Preferences</h2>
+  <div class="field last">
+    <span class="label">Maximum Project Preferences</span>	<%= number_field_tag :max_project_preferences, @max_project_preferences, :min => 1, :max => 10 %>
+  </div>
+
+  <div class="actions">
+    <%= submit_tag "Save", :class => "btn" %>
+  </div>
+  <% end %>
+</div>
+

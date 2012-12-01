@@ -1,6 +1,6 @@
 <ul class="iterations-list">
 <% @iterations.each do |iteration| %>
-  <li>
+  <li class="iteration-item" data-iteration-id="<%= iteration.id %>">
     <div class="iteration-container">
       <div class="iteration-wrapper">
         <span class="iteration-name"><%= iteration.name %></span>: 
